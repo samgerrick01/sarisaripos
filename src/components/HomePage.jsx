@@ -6,21 +6,25 @@ import { getItems } from "../redux/itemsSlice";
 import "./styles/homepage.scss";
 import { baseUrl } from "../api";
 import { Button, Input, Spin } from "antd";
-import { loginStatus } from "../redux/loginSlice";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { items } = useSelector((state) => state.items);
+  const { loginSuccess } = useSelector((state) => state.login);
 
   const [query, setQuery] = useState("");
 
   //Load the Items
   useEffect(() => {
-    axios
-      .get(`${baseUrl}/items`)
-      .then((res) => dispatch(getItems(res.data)))
-      .catch((err) => console.log(err));
+    if (!loginSuccess) {
+      navigate("/");
+    } else {
+      axios
+        .get(`${baseUrl}/items`)
+        .then((res) => dispatch(getItems(res.data)))
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   const addItems = () => {

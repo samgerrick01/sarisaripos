@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { loginStatus } from "../redux/loginSlice";
 import { Button, Input } from "antd";
 import "./styles/addItems.scss";
 import axios from "axios";
@@ -12,6 +11,8 @@ import "react-toastify/dist/ReactToastify.css";
 const AddItems = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { loginSuccess } = useSelector((state) => state.login);
 
   const [formData, setFormData] = useState({
     barcode: "1",
@@ -43,6 +44,12 @@ const AddItems = () => {
     navigate("/home-page");
     dispatch(loginStatus(false));
   };
+
+  useEffect(() => {
+    if (!loginSuccess) {
+      navigate("/");
+    }
+  }, []);
   return (
     <div className="add-items">
       <div className="add-items-container">

@@ -54,6 +54,9 @@
           background-color: #000;
           text-align: center;
         }
+        tbody td {
+          cursor: pointer;
+        }
       }
     }
     > .btns-container {

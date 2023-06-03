@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { loginStatus } from "../redux/loginSlice";
 import { Button, Input } from "antd";
 import "./styles/addItems.scss";
 import axios from "axios";
@@ -9,6 +8,7 @@ import { baseUrl } from "../api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setSelectedItem } from "../redux/itemsSlice";
+import { loginStatus } from "../redux/loginSlice";
 
 const UpdateItems = () => {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const UpdateItems = () => {
   let { id } = useParams();
 
   const { selectedItem } = useSelector((state) => state.items);
+  const { loginSuccess } = useSelector((state) => state.login);
 
   const [formData, setFormData] = useState({
     barcode: "1",
@@ -64,11 +65,16 @@ const UpdateItems = () => {
   };
 
   useEffect(() => {
-    axios
-      .post(`${baseUrl}/selected`, { id })
-      .then((res) => dispatch(setSelectedItem(res.data)))
-      .catch((err) => console.log(err));
+    if (!loginSuccess) {
+      navigate("/");
+    } else {
+      axios
+        .post(`${baseUrl}/selected`, { id })
+        .then((res) => dispatch(setSelectedItem(res.data)))
+        .catch((err) => console.log(err));
+    }
   }, []);
+
   return (
     <div className="add-items">
       <div className="add-items-container">
