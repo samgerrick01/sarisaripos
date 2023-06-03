@@ -1,0 +1,26 @@
+@import "bootstrap";
+
+* {
+  font-size: 24px;
+}
+
+.btns {
+  height: 45px;
+  width: 70%;
+  color: red;
+  outline: none;
+  border: none;
+
+  @include media-breakpoint-down("sm") {
+    width: 100%;
+  }
+}
+
+span {
+  font-size: 16px;
+}
+
+.div-center {
+  display: flex;
+  justify-content: center;
+}
