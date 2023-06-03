@@ -60,7 +60,7 @@ const HomePage = () => {
                 <tr>
                   <th style={{ width: "60%" }}>Items</th>
                   <th style={{ width: "20%" }}>Price</th>
-                  <th style={{ width: "20%" }}>Stocks</th>
+                  {/* <th style={{ width: "20%" }}>Stocks</th> */}
                 </tr>
               </thead>
               <tbody>
@@ -85,9 +85,9 @@ const HomePage = () => {
                       <td style={{ width: "20%", textAlign: "center" }}>
                         {data.price}
                       </td>
-                      <td style={{ width: "20%", textAlign: "center" }}>
+                      {/* <td style={{ width: "20%", textAlign: "center" }}>
                         {data.stocks}
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
               </tbody>

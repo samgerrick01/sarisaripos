@@ -14,10 +14,10 @@ const AddItems = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    barcode: "",
+    barcode: "1",
     label: "",
     price: "",
-    stocks: "",
+    stocks: "1",
   });
   console.log(formData);
 
@@ -34,7 +34,7 @@ const AddItems = () => {
   };
 
   const onClear = () => {
-    setFormData({ barcode: "", label: "", price: "", stocks: "" });
+    setFormData({ barcode: "1", label: "", price: "", stocks: "1" });
     toast.dismiss();
   };
 
@@ -47,13 +47,13 @@ const AddItems = () => {
       <div className="add-items-container">
         <label>Add items</label>
         <div className="add-items-body">
-          <Input
+          {/* <Input
             value={formData.barcode}
             onChange={(e) =>
               setFormData({ ...formData, barcode: e.target.value })
             }
             placeholder="Barcode"
-          />
+          /> */}
           <Input
             value={formData.label}
             onChange={(e) =>
@@ -68,13 +68,13 @@ const AddItems = () => {
             }
             placeholder="How much the Price"
           />
-          <Input
+          {/* <Input
             value={formData.stocks}
             onChange={(e) =>
               setFormData({ ...formData, stocks: e.target.value })
             }
             placeholder="How Many Stocks"
-          />
+          /> */}
         </div>
         <div className="btns-container">
           <Button onClick={addItems} className="btns">
