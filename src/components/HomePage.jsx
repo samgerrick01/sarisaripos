@@ -86,7 +86,12 @@ const HomePage = () => {
                       >
                         {data.label}
                       </td>
-                      <td style={{ width: "20%", textAlign: "center" }}>
+                      <td
+                        style={{
+                          width: "20%",
+                          textAlign: "center",
+                        }}
+                      >
                         {data.price}
                       </td>
                       {/* <td style={{ width: "20%", textAlign: "center" }}>

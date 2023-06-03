@@ -46,6 +46,7 @@
       > .my-table {
         width: 100%; /* Set the table width to 100% */
         table-layout: fixed; /* Fix the table layout */
+        max-height: 52px;
 
         thead th {
           position: sticky;
