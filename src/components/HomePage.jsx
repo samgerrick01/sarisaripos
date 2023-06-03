@@ -71,7 +71,11 @@ const HomePage = () => {
                       data.barcode.toLowerCase().includes(query.toLowerCase())
                   )
                   .map((data) => (
-                    <tr style={{ border: "1px solid red" }} key={data.id}>
+                    <tr
+                      style={{ border: "1px solid red" }}
+                      key={data.id}
+                      onClick={() => navigate(`/update/${data.id}`)}
+                    >
                       <td
                         style={{
                           width: "60%",

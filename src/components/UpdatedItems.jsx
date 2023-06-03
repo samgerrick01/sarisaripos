@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
 import { loginStatus } from "../redux/loginSlice";
 import { Button, Input } from "antd";
 import "./styles/addItems.scss";
@@ -8,10 +8,14 @@ import axios from "axios";
 import { baseUrl } from "../api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { setSelectedItem } from "../redux/itemsSlice";
 
-const AddItems = () => {
+const UpdateItems = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  let { id } = useParams();
+
+  const { selectedItem } = useSelector((state) => state.items);
 
   const [formData, setFormData] = useState({
     barcode: "1",
@@ -20,15 +24,30 @@ const AddItems = () => {
     stocks: "1",
   });
 
-  const addItems = (e) => {
+  useEffect(() => {
+    if (Object.keys(selectedItem).length !== 0) {
+      setFormData({
+        ...formData,
+        barcode:
+          Object.keys(selectedItem).length !== 0 ? selectedItem.barcode : "",
+        label: Object.keys(selectedItem).length !== 0 ? selectedItem.label : "",
+        price: Object.keys(selectedItem).length !== 0 ? selectedItem.price : "",
+        stocks:
+          Object.keys(selectedItem).length !== 0 ? selectedItem.stocks : "",
+      });
+    }
+  }, [selectedItem]);
+
+  const updateItem = (e) => {
     e.preventDefault();
     if (!formData.label || !formData.price) {
       toast.warning("Please Fill the Field!");
     } else {
       axios
-        .post(`${baseUrl}/add`, formData)
+        .put(`${baseUrl}/update/${id}`, formData)
         .then((res) => {
           toast.success(res.data);
+          navigate("/home-page");
         })
         .catch((err) => toast.error("Server Error!"));
     }
@@ -43,10 +62,17 @@ const AddItems = () => {
     navigate("/home-page");
     dispatch(loginStatus(false));
   };
+
+  useEffect(() => {
+    axios
+      .post(`${baseUrl}/selected`, { id })
+      .then((res) => dispatch(setSelectedItem(res.data)))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className="add-items">
       <div className="add-items-container">
-        <label>Add items</label>
+        <label>Update items</label>
         <div className="add-items-body">
           {/* <Input
             value={formData.barcode}
@@ -78,8 +104,8 @@ const AddItems = () => {
           /> */}
         </div>
         <div className="btns-container">
-          <Button onClick={addItems} className="btns">
-            Add
+          <Button onClick={updateItem} className="btns">
+            Update
           </Button>
           <Button onClick={onClear} className="btns">
             Clear
@@ -94,4 +120,4 @@ const AddItems = () => {
   );
 };
 
-export default AddItems;
+export default UpdateItems;
