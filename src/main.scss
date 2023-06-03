@@ -11,7 +11,7 @@
   outline: none;
   border: none;
 
-  @include media-breakpoint-down("sm") {
+  @include media-breakpoint-down("md") {
     width: 100%;
   }
 }

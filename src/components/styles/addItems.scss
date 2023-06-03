@@ -20,7 +20,7 @@
     border-radius: 12px;
     gap: 8px;
 
-    @include media-breakpoint-down("sm") {
+    @include media-breakpoint-down("md") {
       width: 95%;
     }
 
@@ -42,8 +42,9 @@
       gap: 8px;
       width: 100%;
 
-      @include media-breakpoint-down("sm") {
+      @include media-breakpoint-down("md") {
         flex-direction: column;
+        width: 100%;
       }
     }
   }

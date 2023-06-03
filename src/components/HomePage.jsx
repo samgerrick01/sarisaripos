@@ -43,13 +43,27 @@ const HomePage = () => {
   return (
     <div className="homepage">
       <div className="homepage-container">
-        <label>
-          List of items <AiOutlineUnorderedList color="red" />
+        <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <span>
+              List of items <AiOutlineUnorderedList color="red" />
+            </span>
+            <span style={{ fontWeight: "600" }}>
+              Total Items: {items.length}
+            </span>
+          </div>
           <Input
             placeholder="Seach items here"
             onChange={(e) => setQuery(e.target.value)}
           />
-        </label>
+        </div>
+
         <div className="home-table">
           {!items.length && (
             <div
