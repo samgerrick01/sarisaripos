@@ -8,7 +8,6 @@ import { baseUrl } from "../api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setSelectedItem } from "../redux/itemsSlice";
-import { loginStatus } from "../redux/loginSlice";
 
 const UpdateItems = () => {
   const dispatch = useDispatch();
@@ -61,7 +60,6 @@ const UpdateItems = () => {
 
   const onBack = () => {
     navigate("/home-page");
-    dispatch(loginStatus(false));
   };
 
   useEffect(() => {

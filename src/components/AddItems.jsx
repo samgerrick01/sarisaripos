@@ -42,7 +42,6 @@ const AddItems = () => {
 
   const onBack = () => {
     navigate("/home-page");
-    dispatch(loginStatus(false));
   };
 
   useEffect(() => {

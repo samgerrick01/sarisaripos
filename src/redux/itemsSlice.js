@@ -9,7 +9,12 @@ const itemsSlice = createSlice({
   initialState,
   reducers: {
     getItems(state, action) {
-      return { ...state, items: action.payload };
+      return {
+        ...state,
+        items: Array.from(action.payload).sort((a, b) =>
+          a.label.localeCompare(b.label)
+        ),
+      };
     },
     setSelectedItem(state, action) {
       return { ...state, selectedItem: action.payload };
