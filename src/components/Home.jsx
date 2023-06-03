@@ -9,6 +9,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginStatus } from "../redux/loginSlice";
 import { IoLogIn } from "react-icons/io5";
+import { loadingOff, loadingOn } from "../redux/loadingSlice";
+import { CgLogIn } from "react-icons/cg";
+import { GrPowerReset } from "react-icons/gr";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -21,21 +24,26 @@ const Home = () => {
   });
 
   const onSubmit = (e) => {
-    e.preventDefault();
     if (!formData.username || !formData.password) {
       toast.warning("Please Fill the field!");
     } else {
+      dispatch(loadingOn());
       axios
         .post(`${baseUrl}/login`, formData)
         .then((res) => {
           if (res.data === "Login Success!") {
             toast.success(res.data);
             dispatch(loginStatus(true));
+            dispatch(loadingOff());
           } else {
             toast.warning(res.data);
+            dispatch(loadingOff());
           }
         })
-        .catch((err) => toast.error("Server is not Running!"));
+        .catch((err) => {
+          toast.error("Server is not Running!");
+          dispatch(loadingOff());
+        });
     }
   };
 
@@ -83,10 +91,18 @@ const Home = () => {
         />
         <div className="btns-container">
           <Button onClick={onSubmit} className="btns">
-            Login
+            <span
+              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
+            >
+              <CgLogIn color="lime" /> Login
+            </span>
           </Button>
           <Button onClick={onClear} className="btns">
-            Clear
+            <span
+              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
+            >
+              <GrPowerReset color="red" /> Clear
+            </span>
           </Button>
         </div>
       </div>

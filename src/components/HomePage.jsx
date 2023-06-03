@@ -7,6 +7,9 @@ import "./styles/homepage.scss";
 import { baseUrl } from "../api";
 import { Button, Input, Spin } from "antd";
 import { loginStatus } from "../redux/loginSlice";
+import { BsDatabaseAdd } from "react-icons/bs";
+import { BiLogOutCircle } from "react-icons/bi";
+import { AiOutlineUnorderedList } from "react-icons/ai";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -41,7 +44,7 @@ const HomePage = () => {
     <div className="homepage">
       <div className="homepage-container">
         <label>
-          List of items{" "}
+          List of items <AiOutlineUnorderedList color="red" />
           <Input
             placeholder="Seach items here"
             onChange={(e) => setQuery(e.target.value)}
@@ -77,7 +80,7 @@ const HomePage = () => {
                   )
                   .map((data) => (
                     <tr
-                      style={{ border: "1px solid red" }}
+                      style={{ border: "1px solid darkred" }}
                       key={data.id}
                       onClick={() => navigate(`/update/${data.id}`)}
                     >
@@ -110,10 +113,18 @@ const HomePage = () => {
         </div>
         <div className="btns-container">
           <Button onClick={addItems} className="btns">
-            Add Items
+            <span
+              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
+            >
+              <BsDatabaseAdd color="lime" /> Add Items
+            </span>
           </Button>
           <Button onClick={onLogout} className="btns">
-            Log Out
+            <span
+              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
+            >
+              <BiLogOutCircle color="red" /> Log Out
+            </span>
           </Button>
         </div>
       </div>

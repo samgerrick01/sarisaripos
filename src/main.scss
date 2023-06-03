@@ -24,3 +24,23 @@ span {
   display: flex;
   justify-content: center;
 }
+
+.modal-antd {
+  > .ant-modal-content {
+    width: fit-content;
+  }
+}
+
+.ant-modal-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-modal {
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+}

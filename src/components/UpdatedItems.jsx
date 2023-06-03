@@ -8,6 +8,10 @@ import { baseUrl } from "../api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setSelectedItem } from "../redux/itemsSlice";
+import { loadingOff, loadingOn } from "../redux/loadingSlice";
+import { BsDatabaseAdd } from "react-icons/bs";
+import { GrPowerReset } from "react-icons/gr";
+import { RiArrowGoBackFill } from "react-icons/ri";
 
 const UpdateItems = () => {
   const dispatch = useDispatch();
@@ -39,17 +43,21 @@ const UpdateItems = () => {
   }, [selectedItem]);
 
   const updateItem = (e) => {
-    e.preventDefault();
     if (!formData.label || !formData.price) {
       toast.warning("Please Fill the Field!");
     } else {
+      dispatch(loadingOn());
       axios
         .put(`${baseUrl}/update/${id}`, formData)
         .then((res) => {
           toast.success(res.data);
           navigate("/home-page");
+          dispatch(loadingOff());
         })
-        .catch((err) => toast.error("Server Error!"));
+        .catch((err) => {
+          toast.error("Server Error!");
+          dispatch(loadingOff());
+        });
     }
   };
 
@@ -76,7 +84,9 @@ const UpdateItems = () => {
   return (
     <div className="add-items">
       <div className="add-items-container">
-        <label>Update items</label>
+        <label>
+          Update items <BsDatabaseAdd color="lime" />
+        </label>
         <div className="add-items-body">
           {/* <Input
             value={formData.barcode}
@@ -109,13 +119,25 @@ const UpdateItems = () => {
         </div>
         <div className="btns-container">
           <Button onClick={updateItem} className="btns">
-            Update
+            <span
+              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
+            >
+              <BsDatabaseAdd color="lime" /> Update
+            </span>
           </Button>
           <Button onClick={onClear} className="btns">
-            Clear
+            <span
+              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
+            >
+              <GrPowerReset color="red" /> Clear
+            </span>
           </Button>
           <Button onClick={onBack} className="btns">
-            Back
+            <span
+              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
+            >
+              <RiArrowGoBackFill color="blue" /> Back
+            </span>
           </Button>
         </div>
       </div>
