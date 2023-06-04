@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Input, Button } from "antd";
-import { useNavigate } from "react-router";
+import { json, useNavigate } from "react-router";
 import "./styles/home.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { baseUrl } from "../api";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { loginStatus } from "../redux/loginSlice";
+import { setUser } from "../redux/loginSlice";
 import { IoLogIn } from "react-icons/io5";
 import { loadingOff, loadingOn } from "../redux/loadingSlice";
 import { CgLogIn } from "react-icons/cg";
@@ -17,7 +17,7 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { loginSuccess } = useSelector((state) => state.login);
+  const { user } = useSelector((state) => state.login);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -31,12 +31,13 @@ const Home = () => {
       axios
         .post(`${baseUrl}/login`, formData)
         .then((res) => {
-          if (res.data === "Login Success!") {
-            toast.success(res.data);
-            dispatch(loginStatus(true));
+          if (res.data.message === "Login Success!") {
+            toast.success(res.data.message);
+            dispatch(setUser(res.data.user));
+            sessionStorage.setItem("user", JSON.stringify(res.data.user));
             dispatch(loadingOff());
           } else {
-            toast.warning(res.data);
+            toast.warning(res.data.message);
             dispatch(loadingOff());
           }
         })
@@ -54,10 +55,10 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (loginSuccess) {
+    if (sessionStorage.getItem("user")) {
       navigate("/home-page");
     }
-  }, [loginSuccess]);
+  }, [user]);
 
   return (
     <div className="home">

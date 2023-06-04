@@ -6,23 +6,26 @@ import { getItems } from "../redux/itemsSlice";
 import "./styles/homepage.scss";
 import { baseUrl } from "../api";
 import { Button, Input, Spin } from "antd";
-import { loginStatus } from "../redux/loginSlice";
 import { BsDatabaseAdd } from "react-icons/bs";
 import { BiLogOutCircle } from "react-icons/bi";
 import { AiOutlineUnorderedList } from "react-icons/ai";
+import { FaUserCircle } from "react-icons/fa";
+import { Logout } from "../functions";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { items } = useSelector((state) => state.items);
-  const { loginSuccess } = useSelector((state) => state.login);
+
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
   const [query, setQuery] = useState("");
 
   //Load the Items
   useEffect(() => {
-    if (!loginSuccess) {
-      navigate("/");
+    if (!sessionStorage.getItem("user")) {
+      Logout(dispatch, navigate);
     } else {
       axios
         .get(`${baseUrl}/items`)
@@ -36,14 +39,22 @@ const HomePage = () => {
   };
 
   const onLogout = () => {
-    navigate("/");
-    dispatch(loginStatus(false));
+    Logout(dispatch, navigate);
   };
 
   return (
     <div className="homepage">
       <div className="homepage-container">
         <div>
+          <div>
+            Hi!{" "}
+            {user != null ? (
+              <span style={{ textTransform: "capitalize", fontSize: "24px" }}>
+                {user.username}
+              </span>
+            ) : null}{" "}
+            <FaUserCircle />
+          </div>
           <div
             style={{
               display: "flex",
@@ -96,7 +107,11 @@ const HomePage = () => {
                     <tr
                       style={{ border: "1px solid darkred" }}
                       key={data.id}
-                      onClick={() => navigate(`/update/${data.id}`)}
+                      onClick={() => {
+                        if (user.status !== "user") {
+                          navigate(`/update/${data.id}`);
+                        }
+                      }}
                     >
                       <td
                         style={{
@@ -126,13 +141,20 @@ const HomePage = () => {
           )}
         </div>
         <div className="btns-container">
-          <Button onClick={addItems} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <BsDatabaseAdd color="lime" /> Add Items
-            </span>
-          </Button>
+          {user.status === "user" ? null : (
+            <Button onClick={addItems} className="btns">
+              <span
+                style={{
+                  display: "flex",
+                  gap: "8px",
+                  justifyContent: "center",
+                }}
+              >
+                <BsDatabaseAdd color="lime" /> Add Items
+              </span>
+            </Button>
+          )}
+
           <Button onClick={onLogout} className="btns">
             <span
               style={{ display: "flex", gap: "8px", justifyContent: "center" }}

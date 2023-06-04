@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { Button, Input } from "antd";
 import "./styles/addItems.scss";
@@ -11,12 +11,11 @@ import { loadingOff, loadingOn } from "../redux/loadingSlice";
 import { BsDatabaseAdd } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
 import { RiArrowGoBackFill } from "react-icons/ri";
+import { Logout } from "../functions";
 
 const AddItems = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const { loginSuccess } = useSelector((state) => state.login);
 
   const [formData, setFormData] = useState({
     barcode: "1",
@@ -53,8 +52,8 @@ const AddItems = () => {
   };
 
   useEffect(() => {
-    if (!loginSuccess) {
-      navigate("/");
+    if (!sessionStorage.getItem("user")) {
+      Logout(dispatch, navigate);
     }
   }, []);
   return (

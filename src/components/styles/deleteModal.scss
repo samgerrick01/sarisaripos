@@ -1,0 +1,23 @@
+.delete-modal {
+  > .del-modal-btn {
+    display: flex;
+    padding: 12px;
+    justify-content: space-between;
+  }
+  & .del-btn {
+    font-size: 24px;
+    height: 42px;
+    background: darkred;
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+  & .cancel-btn {
+    font-size: 24px;
+    height: 42px;
+    background: lightgreen;
+    display: flex;
+    align-items: center;
+    color: black;
+  }
+}

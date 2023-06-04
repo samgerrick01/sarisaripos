@@ -6,14 +6,10 @@
 
 .btns {
   height: 45px;
-  width: 70%;
+  width: 100%;
   color: red;
   outline: none;
   border: none;
-
-  @include media-breakpoint-down("md") {
-    width: 100%;
-  }
 }
 
 span {
