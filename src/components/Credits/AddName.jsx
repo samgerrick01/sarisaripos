@@ -2,38 +2,38 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { Button, Input } from "antd";
-import "./styles/addItems.scss";
+import "../styles/addItems.scss";
 import axios from "axios";
-import { baseUrl } from "../api";
+import { baseUrl } from "../../api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { loadingOff, loadingOn } from "../redux/loadingSlice";
+import { loadingOff, loadingOn } from "../../redux/loadingSlice";
 import { BsDatabaseAdd } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
 import { RiArrowGoBackFill } from "react-icons/ri";
-import { Logout } from "../functions";
+import { Logout } from "../../functions";
 
-const AddItems = () => {
+const AddName = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    barcode: "1",
-    label: "",
-    price: "",
-    stocks: "1",
+    name: "",
+    item: "",
+    total: 0,
   });
 
   const addItems = (e) => {
-    if (!formData.label || !formData.price) {
+    if (!formData.name) {
       toast.warning("Please Fill the Field!");
     } else {
       dispatch(loadingOn());
       axios
-        .post(`${baseUrl}/add`, formData)
+        .post(`${baseUrl}/addcreditor`, formData)
         .then((res) => {
           toast.success(res.data);
           dispatch(loadingOff());
+          onBack();
         })
         .catch((err) => {
           toast.error("Server Error!");
@@ -43,12 +43,12 @@ const AddItems = () => {
   };
 
   const onClear = () => {
-    setFormData({ barcode: "1", label: "", price: "", stocks: "1" });
+    setFormData({ ...formData, name: "" });
     toast.dismiss();
   };
 
   const onBack = () => {
-    navigate("/home-page");
+    navigate("/credit-list");
   };
 
   useEffect(() => {
@@ -60,37 +60,14 @@ const AddItems = () => {
     <div className="add-items">
       <div className="add-items-container">
         <label>
-          Add items <BsDatabaseAdd color="lime" />
+          Credit Profile <BsDatabaseAdd color="lime" />
         </label>
         <div className="add-items-body">
-          {/* <Input
-            value={formData.barcode}
-            onChange={(e) =>
-              setFormData({ ...formData, barcode: e.target.value })
-            }
-            placeholder="Barcode"
-          /> */}
           <Input
-            value={formData.label}
-            onChange={(e) =>
-              setFormData({ ...formData, label: e.target.value })
-            }
-            placeholder="Name of the item"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            placeholder="Name of Creditor"
           />
-          <Input
-            value={formData.price}
-            onChange={(e) =>
-              setFormData({ ...formData, price: e.target.value })
-            }
-            placeholder="How much the Price"
-          />
-          {/* <Input
-            value={formData.stocks}
-            onChange={(e) =>
-              setFormData({ ...formData, stocks: e.target.value })
-            }
-            placeholder="How Many Stocks"
-          /> */}
         </div>
         <div className="btns-container">
           <Button onClick={addItems} className="btns">
@@ -121,4 +98,4 @@ const AddItems = () => {
   );
 };
 
-export default AddItems;
+export default AddName;

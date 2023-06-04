@@ -36,6 +36,10 @@
       @include media-breakpoint-down("sm") {
         font-size: 12px;
       }
+
+      .ant-input:disabled {
+        background-color: lightgrey;
+      }
     }
     > .btns-container {
       display: flex;

@@ -2,21 +2,20 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { getItems } from "../redux/itemsSlice";
-import "./styles/homepage.scss";
-import { baseUrl } from "../api";
+import "../styles/homepage.scss";
+import { baseUrl } from "../../api";
 import { Button, Input, Spin } from "antd";
 import { BsDatabaseAdd } from "react-icons/bs";
-import { BiLogOutCircle } from "react-icons/bi";
 import { AiOutlineUnorderedList } from "react-icons/ai";
-import { FaUserCircle } from "react-icons/fa";
-import { Logout } from "../functions";
+import { RiArrowGoBackFill } from "react-icons/ri";
+import { Logout } from "../../functions";
+import { getCredits } from "../../redux/creditSlice";
 
-const HomePage = () => {
+const CreditList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { items } = useSelector((state) => state.items);
+  const { listOfCredits } = useSelector((state) => state.credits);
 
   const user = JSON.parse(sessionStorage.getItem("user"));
 
@@ -28,33 +27,16 @@ const HomePage = () => {
       Logout(dispatch, navigate);
     } else {
       axios
-        .get(`${baseUrl}/items`)
-        .then((res) => dispatch(getItems(res.data)))
+        .get(`${baseUrl}/credits`)
+        .then((res) => dispatch(getCredits(res.data)))
         .catch((err) => console.log(err));
     }
   }, []);
-
-  const addItems = () => {
-    navigate("/add-items");
-  };
-
-  const onLogout = () => {
-    Logout(dispatch, navigate);
-  };
 
   return (
     <div className="homepage">
       <div className="homepage-container">
         <div>
-          <div>
-            Hi!{" "}
-            {user != null ? (
-              <span style={{ textTransform: "capitalize", fontSize: "24px" }}>
-                {user.username}
-              </span>
-            ) : null}{" "}
-            <FaUserCircle />
-          </div>
           <div
             style={{
               display: "flex",
@@ -63,10 +45,10 @@ const HomePage = () => {
             }}
           >
             <span>
-              List of items <AiOutlineUnorderedList color="red" />
+              List of Credits <AiOutlineUnorderedList color="red" />
             </span>
             <span style={{ fontWeight: "600" }}>
-              Total Items: {items.length}
+              May Utang: {listOfCredits.length}
             </span>
           </div>
           <Input
@@ -76,7 +58,7 @@ const HomePage = () => {
         </div>
 
         <div className="home-table">
-          {!items.length && (
+          {!listOfCredits.length && (
             <div
               style={{
                 display: "flex",
@@ -87,21 +69,19 @@ const HomePage = () => {
               <Spin />
             </div>
           )}
-          {items.length != 0 && (
+          {listOfCredits.length != 0 && (
             <table className="my-table">
               <thead>
                 <tr>
-                  <th style={{ width: "60%" }}>Items</th>
-                  <th style={{ width: "20%" }}>Price</th>
+                  <th style={{ width: "60%" }}>Name</th>
+                  <th style={{ width: "20%" }}>Total</th>
                   {/* <th style={{ width: "20%" }}>Stocks</th> */}
                 </tr>
               </thead>
               <tbody>
-                {items
-                  .filter(
-                    (data) =>
-                      data.label.toLowerCase().includes(query.toLowerCase()) ||
-                      data.barcode.toLowerCase().includes(query.toLowerCase())
+                {listOfCredits
+                  .filter((data) =>
+                    data.name.toLowerCase().includes(query.toLowerCase())
                   )
                   .map((data) => (
                     <tr
@@ -109,7 +89,7 @@ const HomePage = () => {
                       key={data.id}
                       onClick={() => {
                         if (user.status !== "user") {
-                          navigate(`/update/${data.id}`);
+                          navigate(`/updatecredit/${data.id}`);
                         }
                       }}
                     >
@@ -121,7 +101,7 @@ const HomePage = () => {
                           textOverflow: "ellipsis",
                         }}
                       >
-                        {data.label}
+                        {data.name}
                       </td>
                       <td
                         style={{
@@ -129,11 +109,8 @@ const HomePage = () => {
                           textAlign: "center",
                         }}
                       >
-                        {data.price}
+                        {data.total}
                       </td>
-                      {/* <td style={{ width: "20%", textAlign: "center" }}>
-                        {data.stocks}
-                      </td> */}
                     </tr>
                   ))}
               </tbody>
@@ -141,25 +118,23 @@ const HomePage = () => {
           )}
         </div>
         <div className="btns-container">
-          {user.status === "user" ? null : (
-            <Button onClick={addItems} className="btns">
-              <span
-                style={{
-                  display: "flex",
-                  gap: "8px",
-                  justifyContent: "center",
-                }}
-              >
-                <BsDatabaseAdd color="lime" /> Add Items
-              </span>
-            </Button>
-          )}
+          <Button onClick={() => navigate("/add-name")} className="btns">
+            <span
+              style={{
+                display: "flex",
+                gap: "8px",
+                justifyContent: "center",
+              }}
+            >
+              <BsDatabaseAdd color="lime" /> I-Add ang uutang
+            </span>
+          </Button>
 
-          <Button onClick={onLogout} className="btns">
+          <Button onClick={() => navigate("/home-page")} className="btns">
             <span
               style={{ display: "flex", gap: "8px", justifyContent: "center" }}
             >
-              <BiLogOutCircle color="red" /> Log Out
+              <RiArrowGoBackFill color="red" /> Back
             </span>
           </Button>
         </div>
@@ -168,4 +143,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default CreditList;

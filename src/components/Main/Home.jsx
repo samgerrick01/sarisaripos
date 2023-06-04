@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Input, Button } from "antd";
 import { json, useNavigate } from "react-router";
-import "./styles/home.scss";
+import "../styles/home.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { baseUrl } from "../api";
+import { baseUrl } from "../../api";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { setUser } from "../redux/loginSlice";
+import { setUser } from "../../redux/loginSlice";
 import { IoLogIn } from "react-icons/io5";
-import { loadingOff, loadingOn } from "../redux/loadingSlice";
+import { loadingOff, loadingOn } from "../../redux/loadingSlice";
 import { CgLogIn } from "react-icons/cg";
 import { GrPowerReset } from "react-icons/gr";
 

@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { Button, Input, Modal } from "antd";
-import "./styles/addItems.scss";
-import "./styles/deleteModal.scss";
+import "../styles/addItems.scss";
+import "../styles/deleteModal.scss";
 import axios from "axios";
-import { baseUrl } from "../api";
+import { baseUrl } from "../../api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { setSelectedItem } from "../redux/itemsSlice";
-import { loadingOff, loadingOn } from "../redux/loadingSlice";
+import { setSelectedItem } from "../../redux/itemsSlice";
+import { loadingOff, loadingOn } from "../../redux/loadingSlice";
 import { BsDatabaseAdd } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { FaTrash } from "react-icons/fa";
 import { IoWarning } from "react-icons/io5";
-import { Logout } from "../functions";
+import { Logout } from "../../functions";
 
 const UpdateItems = () => {
   const dispatch = useDispatch();
@@ -79,7 +79,7 @@ const UpdateItems = () => {
   const deleteHandle = () => {
     dispatch(loadingOn());
     axios
-      .put(`${baseUrl}/delete/${id}`)
+      .delete(`${baseUrl}/delete/${id}`)
       .then((res) => {
         toast.success(res.data);
         navigate("/home-page");
@@ -133,6 +133,7 @@ const UpdateItems = () => {
             placeholder="Name of the item"
           />
           <Input
+            type="number"
             value={formData.price}
             onChange={(e) =>
               setFormData({ ...formData, price: e.target.value })
