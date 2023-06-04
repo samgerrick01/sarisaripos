@@ -87,11 +87,7 @@ const CreditList = () => {
                     <tr
                       style={{ border: "1px solid darkred" }}
                       key={data.id}
-                      onClick={() => {
-                        if (user.status !== "user") {
-                          navigate(`/updatecredit/${data.id}`);
-                        }
-                      }}
+                      onClick={() => navigate(`/updatecredit/${data.id}`)}
                     >
                       <td
                         style={{
