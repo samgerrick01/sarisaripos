@@ -132,16 +132,7 @@ const HomePage = () => {
                           }
                         }}
                       >
-                        <td
-                          style={{
-                            width: "60%",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                          }}
-                        >
-                          {data.label}
-                        </td>
+                        <td>{data.label}</td>
                         <td
                           style={{
                             width: "20%",

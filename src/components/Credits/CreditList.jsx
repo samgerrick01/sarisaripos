@@ -104,16 +104,7 @@ const CreditList = () => {
                         onClick={() => navigate(`/updatecredit/${data.id}`)}
                         style={{ height: "52px" }}
                       >
-                        <td
-                          style={{
-                            width: "60%",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                          }}
-                        >
-                          {data.name}
-                        </td>
+                        <td>{data.name}</td>
                         <td
                           style={{
                             width: "20%",
