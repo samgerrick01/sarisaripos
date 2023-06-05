@@ -28,7 +28,9 @@ const HomePage = () => {
 
   const { items } = useSelector((state) => state.items);
 
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  let user = sessionStorage.getItem("user")
+    ? JSON.parse(sessionStorage.getItem("user"))
+    : {};
 
   const [query, setQuery] = useState("");
 
@@ -151,17 +153,19 @@ const HomePage = () => {
             )}
           </div>
           <Row>
-            {user.status === "user" ? null : (
-              <Col sm>
-                <Button
-                  variant="success"
-                  className="w-100 mb-1"
-                  onClick={addItems}
-                >
-                  <BsDatabaseAdd color="black" /> Add Items
-                </Button>
-              </Col>
-            )}
+            {Object.keys(user).length ? (
+              user.status === "user" ? null : (
+                <Col sm>
+                  <Button
+                    variant="success"
+                    className="w-100 mb-1"
+                    onClick={addItems}
+                  >
+                    <BsDatabaseAdd color="black" /> Add Items
+                  </Button>
+                </Col>
+              )
+            ) : null}
             <Col sm>
               <Button
                 variant="primary"

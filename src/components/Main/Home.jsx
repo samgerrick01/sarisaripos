@@ -88,6 +88,11 @@ const Home = () => {
             </Col>
             <Col sm className="mb-3">
               <FormControl
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    onSubmit();
+                  }
+                }}
                 autoComplete="off"
                 id="password"
                 placeholder="Password"
