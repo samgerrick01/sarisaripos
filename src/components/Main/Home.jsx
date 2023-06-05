@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Input, Button } from "antd";
-import { json, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import "../styles/home.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { baseUrl } from "../../api";
@@ -12,6 +11,10 @@ import { IoLogIn } from "react-icons/io5";
 import { loadingOff, loadingOn } from "../../redux/loadingSlice";
 import { CgLogIn } from "react-icons/cg";
 import { GrPowerReset } from "react-icons/gr";
+//antd
+// import { Input, Button } from "antd";
+//bootstrap
+import { Row, Col, Button, FormControl, Card } from "react-bootstrap";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -62,51 +65,55 @@ const Home = () => {
 
   return (
     <div className="home">
-      <div className="login-container">
-        <label className="home-title">
-          <IoLogIn style={{ width: "52px", height: "52px" }} />
-          Login Form
-        </label>
-        <Input
-          autoComplete="off"
-          id="username"
-          onChange={(e) => {
-            setFormData({ ...formData, username: e.target.value });
-          }}
-          value={formData.username}
-          placeholder="Username"
-          className="input"
-          onPressEnter={onSubmit}
-        />
-        <Input
-          autoComplete="off"
-          id="password"
-          onChange={(e) => {
-            setFormData({ ...formData, password: e.target.value });
-          }}
-          value={formData.password}
-          type="password"
-          placeholder="Password"
-          className="input"
-          onPressEnter={onSubmit}
-        />
-        <div className="btns-container">
-          <Button onClick={onSubmit} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <CgLogIn color="lime" /> Login
-            </span>
-          </Button>
-          <Button onClick={onClear} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <GrPowerReset color="red" /> Clear
-            </span>
-          </Button>
-        </div>
-      </div>
+      <Card
+        style={{ padding: "12px", background: "lightblue", margin: "12px" }}
+      >
+        <Card.Body>
+          <Card.Title>
+            <IoLogIn style={{ width: "52px", height: "52px" }} />
+            Login Form
+          </Card.Title>
+          <Row>
+            <Col sm className="mb-3">
+              <FormControl
+                autoComplete="off"
+                id="username"
+                placeholder="Username"
+                type="username"
+                value={formData.username}
+                onChange={(e) =>
+                  setFormData({ ...formData, username: e.target.value })
+                }
+              />
+            </Col>
+            <Col sm className="mb-3">
+              <FormControl
+                autoComplete="off"
+                id="password"
+                placeholder="Password"
+                type="password"
+                value={formData.password}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm className="mb-3">
+              <Button onClick={onSubmit} variant="primary" className="w-100">
+                <CgLogIn color="lime" /> Login
+              </Button>
+            </Col>
+            <Col sm className="mb-3">
+              <Button onClick={onClear} variant="secondary" className="w-100">
+                <GrPowerReset color="red" /> Clear
+              </Button>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
+
       <ToastContainer position="top-center" />
     </div>
   );

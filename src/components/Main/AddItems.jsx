@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { Button, Input } from "antd";
 import "../styles/addItems.scss";
 import axios from "axios";
 import { baseUrl } from "../../api";
@@ -12,6 +11,9 @@ import { BsDatabaseAdd } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { Logout } from "../../functions";
+
+//bootstrap
+import { Row, Col, Button, FormControl, Card } from "react-bootstrap";
 
 const AddItems = () => {
   const dispatch = useDispatch();
@@ -58,65 +60,62 @@ const AddItems = () => {
   }, []);
   return (
     <div className="add-items">
-      <div className="add-items-container">
-        <label>
-          Add items <BsDatabaseAdd color="lime" />
-        </label>
-        <div className="add-items-body">
-          {/* <Input
-            value={formData.barcode}
-            onChange={(e) =>
-              setFormData({ ...formData, barcode: e.target.value })
-            }
-            placeholder="Barcode"
-          /> */}
-          <Input
-            value={formData.label}
-            onChange={(e) =>
-              setFormData({ ...formData, label: e.target.value })
-            }
-            placeholder="Name of the item"
-          />
-          <Input
-            type="number"
-            value={formData.price}
-            onChange={(e) =>
-              setFormData({ ...formData, price: e.target.value })
-            }
-            placeholder="How much the Price"
-          />
-          {/* <Input
-            value={formData.stocks}
-            onChange={(e) =>
-              setFormData({ ...formData, stocks: e.target.value })
-            }
-            placeholder="How Many Stocks"
-          /> */}
-        </div>
-        <div className="btns-container">
-          <Button onClick={addItems} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <BsDatabaseAdd color="lime" /> Add
-            </span>
-          </Button>
-          <Button onClick={onClear} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <GrPowerReset color="red" /> Clear
-            </span>
-          </Button>
-          <Button onClick={onBack} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <RiArrowGoBackFill color="blue" /> Back
-            </span>
-          </Button>
-        </div>
-      </div>
+      <Card
+        style={{
+          padding: "12px",
+          background: "lightblue",
+          margin: "12px",
+          width: "100%",
+        }}
+      >
+        <Card.Body>
+          <Card.Title>
+            Add Items <BsDatabaseAdd color="lime" />
+          </Card.Title>
+
+          <Row>
+            <Col sm className="mb-3">
+              <FormControl
+                autoComplete="off"
+                id="item"
+                placeholder="Name of the item"
+                value={formData.label}
+                onChange={(e) =>
+                  setFormData({ ...formData, label: e.target.value })
+                }
+              />
+            </Col>
+            <Col sm className="mb-3">
+              <FormControl
+                autoComplete="off"
+                id="price"
+                placeholder="How much the Price"
+                value={formData.price}
+                onChange={(e) =>
+                  setFormData({ ...formData, price: e.target.value })
+                }
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm className="mb-3">
+              <Button onClick={addItems} variant="success" className="w-100">
+                <BsDatabaseAdd color="lime" /> Add
+              </Button>
+            </Col>
+            <Col sm className="mb-3">
+              <Button onClick={onClear} variant="secondary" className="w-100">
+                <GrPowerReset color="red" /> Clear
+              </Button>
+            </Col>
+            <Col sm className="mb-3">
+              <Button onClick={onBack} variant="primary" className="w-100">
+                <RiArrowGoBackFill color="black" /> Back
+              </Button>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
       <ToastContainer position="top-center" />
     </div>
   );

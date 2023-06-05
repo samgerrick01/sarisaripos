@@ -1,55 +1,8 @@
-@import "../../custom-variables";
-@import "bootstrap";
-
 .add-items {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100vh;
-  background-color: black;
-  color: #fff;
-
-  > .add-items-container {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    border: 1px solid white;
-    padding: 48px;
-    border-radius: 12px;
-    gap: 8px;
-
-    @include media-breakpoint-down("md") {
-      width: 95%;
-    }
-
-    & .add-items-body {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 100%;
-      padding: 12px;
-      border: 1px solid green;
-      border-radius: 12px;
-
-      @include media-breakpoint-down("sm") {
-        font-size: 12px;
-      }
-
-      .ant-input:disabled {
-        background-color: lightgrey;
-      }
-    }
-    > .btns-container {
-      display: flex;
-      gap: 8px;
-      width: 100%;
-
-      @include media-breakpoint-down("md") {
-        flex-direction: column;
-        width: 100%;
-      }
-    }
-  }
+  background-color: lightslategray;
 }

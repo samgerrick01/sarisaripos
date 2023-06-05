@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { Button, Input, Modal, Select } from "antd";
+import { Modal, Select } from "antd";
 import "../styles/addItems.scss";
 import "../styles/deleteModal.scss";
 import axios from "axios";
@@ -17,6 +17,9 @@ import { Logout } from "../../functions";
 import { setSelectedCredit } from "../../redux/creditSlice";
 import { getItems } from "../../redux/itemsSlice";
 import { AiOutlineUnorderedList } from "react-icons/ai";
+
+//bootstrap
+import { Row, Col, Button, FormControl, Card } from "react-bootstrap";
 
 const UpdatedCredits = () => {
   const dispatch = useDispatch();
@@ -146,95 +149,149 @@ const UpdatedCredits = () => {
 
   return (
     <div className="add-items">
-      <div className="add-items-container">
-        <label>
-          Mag add ng item
-          <BsDatabaseAdd color="lime" />
-        </label>
-        <div className="add-items-body">
-          <Select
-            mode="combobox"
-            showSearch
-            value={formData.item}
-            onChange={(e) => {
-              const getPrice = items.find((el) => el.label === e).price;
-              setFormData({
-                ...formData,
-                item: e,
-                price: getPrice,
-              });
-              document.getElementById("quantity").focus();
-            }}
-          >
-            {items
-              .filter(
-                (data) =>
-                  data.label
-                    .toLowerCase()
-                    .includes(formData.item.toLowerCase()) ||
-                  data.barcode
-                    .toLowerCase()
-                    .includes(formData.item.toLowerCase())
-              )
-              .map((data) => (
-                <Select.Option key={data.id} value={data.label}>
-                  {data.label}
-                </Select.Option>
-              ))}
-          </Select>
-          <Input
-            disabled
-            type="number"
-            value={formData.price}
-            onChange={(e) =>
-              setFormData({ ...formData, price: e.target.value })
-            }
-            placeholder="How much the Price"
-          />
-          <Input
-            id="quantity"
-            type="number"
-            value={formData.qty}
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                qty: e.target.value,
-              });
-            }}
-            placeholder="Quantity"
-          />
-        </div>
-        <div className="btns-container">
-          <Button onClick={addItem} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
+      <Card
+        style={{
+          padding: "12px",
+          background: "lightblue",
+          margin: "12px",
+          width: "100%",
+        }}
+      >
+        <Card.Body>
+          <Card.Title>
+            <BsDatabaseAdd color="lime" /> Mag add ng item
+          </Card.Title>
+          <Row className="mb-2">
+            <Col>
+              <Select
+                className="select-height w-100"
+                mode="combobox"
+                showSearch
+                value={formData.item}
+                onChange={(e) => {
+                  const getPrice = items.find((el) => el.label === e).price;
+                  setFormData({
+                    ...formData,
+                    item: e,
+                    price: getPrice,
+                  });
+                  document.getElementById("quantity").focus();
+                }}
+              >
+                {items
+                  .filter(
+                    (data) =>
+                      data.label
+                        .toLowerCase()
+                        .includes(formData.item.toLowerCase()) ||
+                      data.barcode
+                        .toLowerCase()
+                        .includes(formData.item.toLowerCase())
+                  )
+                  .map((data) => (
+                    <Select.Option key={data.id} value={data.label}>
+                      {data.label}
+                    </Select.Option>
+                  ))}
+              </Select>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <FormControl
+                disabled
+                type="number"
+                value={formData.price}
+                onChange={(e) =>
+                  setFormData({ ...formData, price: e.target.value })
+                }
+                placeholder="Price"
+              />
+            </Col>
+
+            <Col>
+              <FormControl
+                id="quantity"
+                type="number"
+                value={formData.qty}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    qty: e.target.value,
+                  });
+                }}
+                placeholder="Qty"
+              />
+            </Col>
+          </Row>
+        </Card.Body>
+
+        <Row>
+          <Col sm className="mb-1">
+            <Button className="w-100" variant="success" onClick={addItem}>
+              <span
+                style={{
+                  display: "flex",
+                  gap: "8px",
+                  justifyContent: "center",
+                }}
+              >
+                <BsDatabaseAdd color="lime" /> Add
+              </span>
+            </Button>
+          </Col>
+
+          <Col sm className="mb-1">
+            <Button
+              className="w-100"
+              variant="warning"
+              onClick={() => setOpenModal(true)}
             >
-              <BsDatabaseAdd color="lime" /> Add
-            </span>
-          </Button>
-          <Button onClick={() => setOpenModal(true)} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <AiOutlineUnorderedList color="red" /> View Items
-            </span>
-          </Button>
-          <Button onClick={onClear} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <GrPowerReset color="red" /> Clear
-            </span>
-          </Button>
-          <Button onClick={onBack} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <RiArrowGoBackFill color="blue" /> Back
-            </span>
-          </Button>
-        </div>
-      </div>
+              <span
+                style={{
+                  display: "flex",
+                  gap: "8px",
+                  justifyContent: "center",
+                }}
+              >
+                <AiOutlineUnorderedList color="red" /> View Items
+              </span>
+            </Button>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col sm className="mb-1">
+            <Button className="w-100" variant="secondary" onClick={onClear}>
+              <span
+                style={{
+                  display: "flex",
+                  gap: "8px",
+                  justifyContent: "center",
+                }}
+              >
+                <GrPowerReset color="red" /> Clear
+              </span>
+            </Button>
+          </Col>
+
+          <Col sm className="mb-1">
+            <Button className="w-100" variant="primary" onClick={onBack}>
+              <span
+                style={{
+                  display: "flex",
+                  gap: "8px",
+                  justifyContent: "center",
+                }}
+              >
+                <RiArrowGoBackFill color="blue" /> Back
+              </span>
+            </Button>
+          </Col>
+        </Row>
+      </Card>
+
       <ToastContainer position="top-center" />
       <Modal
         title={
@@ -266,12 +323,12 @@ const UpdatedCredits = () => {
           </div>
           <div className="del-modal-btn">
             {selectedCredit.total > 0 ? (
-              <Button className="del-btn" onClick={() => setOpenModal1(true)}>
+              <Button variant="danger" onClick={() => setOpenModal1(true)}>
                 Paid
               </Button>
             ) : null}
 
-            <Button className="cancel-btn" onClick={() => setOpenModal(false)}>
+            <Button variant="primary" onClick={() => setOpenModal(false)}>
               Cancel
             </Button>
           </div>
@@ -293,10 +350,10 @@ const UpdatedCredits = () => {
             Are you sure {selectedCredit.name} is paid ?
           </div>
           <div className="del-modal-btn">
-            <Button className="del-btn" onClick={paidHandle}>
+            <Button variant="danger" onClick={paidHandle}>
               Paid
             </Button>
-            <Button className="cancel-btn" onClick={() => setOpenModal1(false)}>
+            <Button variant="primary" onClick={() => setOpenModal1(false)}>
               Cancel
             </Button>
           </div>

@@ -4,12 +4,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import "../styles/homepage.scss";
 import { baseUrl } from "../../api";
-import { Button, Input, Spin } from "antd";
 import { BsDatabaseAdd } from "react-icons/bs";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { Logout } from "../../functions";
 import { getCredits } from "../../redux/creditSlice";
+
+//bootstrap
+import {
+  Row,
+  Col,
+  Button,
+  FormControl,
+  Card,
+  Table,
+  Spinner,
+} from "react-bootstrap";
 
 const CreditList = () => {
   const dispatch = useDispatch();
@@ -35,106 +45,128 @@ const CreditList = () => {
 
   return (
     <div className="homepage">
-      <div className="homepage-container">
-        <div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <span>
-              List of Credits <AiOutlineUnorderedList color="red" />
-            </span>
-            <span style={{ fontWeight: "600" }}>
-              May Utang: {listOfCredits.length}
-            </span>
+      <Card
+        style={{
+          padding: "12px",
+          background: "lightblue",
+          margin: "12px",
+          width: "100%",
+        }}
+      >
+        <Card.Body>
+          <div className="d-flex justify-content-between w-100">
+            <label>
+              <AiOutlineUnorderedList color="red" />
+              List of Credits
+            </label>
+            <label>May Utang: {listOfCredits.length}</label>
           </div>
-          <Input
+
+          <FormControl
             placeholder="Seach items here"
             onChange={(e) => setQuery(e.target.value)}
           />
-        </div>
 
-        <div className="home-table">
-          {!listOfCredits.length && (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Spin />
-            </div>
-          )}
-          {listOfCredits.length != 0 && (
-            <table className="my-table">
-              <thead>
-                <tr>
-                  <th style={{ width: "60%" }}>Name</th>
-                  <th style={{ width: "20%" }}>Total</th>
-                  {/* <th style={{ width: "20%" }}>Stocks</th> */}
-                </tr>
-              </thead>
-              <tbody>
-                {listOfCredits
-                  .filter((data) =>
-                    data.name.toLowerCase().includes(query.toLowerCase())
-                  )
-                  .map((data) => (
-                    <tr
-                      style={{ border: "1px solid darkred" }}
-                      key={data.id}
-                      onClick={() => navigate(`/updatecredit/${data.id}`)}
-                    >
-                      <td
-                        style={{
-                          width: "60%",
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
+          <div className="home-table">
+            {!listOfCredits.length && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Spinner />
+              </div>
+            )}
+            {listOfCredits.length != 0 && (
+              <Table
+                striped
+                bordered
+                hover
+                variant="light"
+                className="my-table"
+              >
+                <thead>
+                  <tr>
+                    <th style={{ width: "60%" }}>Name</th>
+                    <th style={{ width: "20%" }}>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {listOfCredits
+                    .filter((data) =>
+                      data.name.toLowerCase().includes(query.toLowerCase())
+                    )
+                    .map((data) => (
+                      <tr
+                        key={data.id}
+                        onClick={() => navigate(`/updatecredit/${data.id}`)}
+                        style={{ height: "52px" }}
                       >
-                        {data.name}
-                      </td>
-                      <td
-                        style={{
-                          width: "20%",
-                          textAlign: "center",
-                        }}
-                      >
-                        {data.total}
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-        <div className="btns-container">
-          <Button onClick={() => navigate("/add-name")} className="btns">
-            <span
-              style={{
-                display: "flex",
-                gap: "8px",
-                justifyContent: "center",
-              }}
-            >
-              <BsDatabaseAdd color="lime" /> I-Add ang uutang
-            </span>
-          </Button>
+                        <td
+                          style={{
+                            width: "60%",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {data.name}
+                        </td>
+                        <td
+                          style={{
+                            width: "20%",
+                            textAlign: "center",
+                          }}
+                        >
+                          {data.total}
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </Table>
+            )}
+          </div>
 
-          <Button onClick={() => navigate("/home-page")} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <RiArrowGoBackFill color="red" /> Back
-            </span>
-          </Button>
-        </div>
-      </div>
+          <Row>
+            <Col sm className="mb-2">
+              <Button
+                className="w-100"
+                onClick={() => navigate("/add-name")}
+                variant="success"
+              >
+                <span
+                  style={{
+                    display: "flex",
+                    gap: "8px",
+                    justifyContent: "center",
+                  }}
+                >
+                  <BsDatabaseAdd color="lime" /> I-Add ang uutang
+                </span>
+              </Button>
+            </Col>
+            <Col sm className="mb-2">
+              <Button
+                className="w-100"
+                onClick={() => navigate("/home-page")}
+                variant="primary"
+              >
+                <span
+                  style={{
+                    display: "flex",
+                    gap: "8px",
+                    justifyContent: "center",
+                  }}
+                >
+                  <RiArrowGoBackFill color="red" /> Back
+                </span>
+              </Button>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
     </div>
   );
 };

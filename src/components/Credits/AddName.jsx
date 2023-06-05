@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { Button, Input } from "antd";
 import "../styles/addItems.scss";
 import axios from "axios";
 import { baseUrl } from "../../api";
@@ -12,6 +11,9 @@ import { BsDatabaseAdd } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { Logout } from "../../functions";
+
+//bootstrap
+import { Row, Col, Button, FormControl, Card } from "react-bootstrap";
 
 const AddName = () => {
   const dispatch = useDispatch();
@@ -58,41 +60,51 @@ const AddName = () => {
   }, []);
   return (
     <div className="add-items">
-      <div className="add-items-container">
-        <label>
-          Credit Profile <BsDatabaseAdd color="lime" />
-        </label>
-        <div className="add-items-body">
-          <Input
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            placeholder="Name of Creditor"
-          />
-        </div>
-        <div className="btns-container">
-          <Button onClick={addItems} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <BsDatabaseAdd color="lime" /> Add
-            </span>
-          </Button>
-          <Button onClick={onClear} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <GrPowerReset color="red" /> Clear
-            </span>
-          </Button>
-          <Button onClick={onBack} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <RiArrowGoBackFill color="blue" /> Back
-            </span>
-          </Button>
-        </div>
-      </div>
+      <Card
+        style={{
+          padding: "12px",
+          background: "lightblue",
+          margin: "12px",
+          width: "100%",
+        }}
+      >
+        <Card.Body>
+          <Card.Title>
+            Add Profile <BsDatabaseAdd color="lime" />
+          </Card.Title>
+
+          <Row>
+            <Col sm className="mb-3">
+              <FormControl
+                autoComplete="off"
+                id="item"
+                placeholder="Name of Creditor"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm className="mb-3">
+              <Button onClick={addItems} variant="success" className="w-100">
+                <BsDatabaseAdd color="lime" /> Add
+              </Button>
+            </Col>
+            <Col sm className="mb-3">
+              <Button onClick={onClear} variant="secondary" className="w-100">
+                <GrPowerReset color="red" /> Clear
+              </Button>
+            </Col>
+            <Col sm className="mb-3">
+              <Button onClick={onBack} variant="primary" className="w-100">
+                <RiArrowGoBackFill color="black" /> Back
+              </Button>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
       <ToastContainer position="top-center" />
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { Button, Input, Modal } from "antd";
 import "../styles/addItems.scss";
 import "../styles/deleteModal.scss";
 import axios from "axios";
@@ -16,6 +15,10 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 import { FaTrash } from "react-icons/fa";
 import { IoWarning } from "react-icons/io5";
 import { Logout } from "../../functions";
+//antd
+import { Modal } from "antd";
+//bootstrap
+import { Row, Col, Button, FormControl, Card } from "react-bootstrap";
 
 const UpdateItems = () => {
   const dispatch = useDispatch();
@@ -113,78 +116,69 @@ const UpdateItems = () => {
 
   return (
     <div className="add-items">
-      <div className="add-items-container">
-        <label>
-          Update items <BsDatabaseAdd color="lime" />
-        </label>
-        <div className="add-items-body">
-          {/* <Input
-            value={formData.barcode}
-            onChange={(e) =>
-              setFormData({ ...formData, barcode: e.target.value })
-            }
-            placeholder="Barcode"
-          /> */}
-          <Input
-            value={formData.label}
-            onChange={(e) =>
-              setFormData({ ...formData, label: e.target.value })
-            }
-            placeholder="Name of the item"
-          />
-          <Input
-            type="number"
-            value={formData.price}
-            onChange={(e) =>
-              setFormData({ ...formData, price: e.target.value })
-            }
-            placeholder="How much the Price"
-          />
-          {/* <Input
-            value={formData.stocks}
-            onChange={(e) =>
-              setFormData({ ...formData, stocks: e.target.value })
-            }
-            placeholder="How Many Stocks"
-          /> */}
-        </div>
-        <div className="btns-container">
-          <Button onClick={updateItem} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <BsDatabaseAdd color="lime" /> Update
-            </span>
-          </Button>
-          {user.status === "administrator" && (
-            <Button onClick={deleteItem} className="btns">
-              <span
-                style={{
-                  display: "flex",
-                  gap: "8px",
-                  justifyContent: "center",
-                }}
-              >
-                <FaTrash color="red" /> Delete
-              </span>
-            </Button>
-          )}
-          <Button onClick={onClear} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <GrPowerReset color="red" /> Clear
-            </span>
-          </Button>
-          <Button onClick={onBack} className="btns">
-            <span
-              style={{ display: "flex", gap: "8px", justifyContent: "center" }}
-            >
-              <RiArrowGoBackFill color="blue" /> Back
-            </span>
-          </Button>
-        </div>
-      </div>
+      <Card
+        style={{
+          padding: "12px",
+          background: "lightblue",
+          margin: "12px",
+          width: "100%",
+        }}
+      >
+        <Card.Body>
+          <Card.Title>
+            Update Items <BsDatabaseAdd color="lime" />
+          </Card.Title>
+
+          <Row>
+            <Col sm className="mb-3">
+              <FormControl
+                autoComplete="off"
+                id="item"
+                placeholder="Name of the item"
+                value={formData.label}
+                onChange={(e) =>
+                  setFormData({ ...formData, label: e.target.value })
+                }
+              />
+            </Col>
+            <Col sm className="mb-3">
+              <FormControl
+                autoComplete="off"
+                id="price"
+                placeholder="How much the Price"
+                value={formData.price}
+                onChange={(e) =>
+                  setFormData({ ...formData, price: e.target.value })
+                }
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm className="mb-1">
+              <Button onClick={updateItem} variant="success" className="w-100">
+                <BsDatabaseAdd color="lime" /> Update
+              </Button>
+            </Col>
+            <Col sm className="mb-1">
+              <Button onClick={deleteItem} variant="danger" className="w-100">
+                <FaTrash color="black" /> Delete
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm className="mb-1">
+              <Button onClick={onClear} variant="secondary" className="w-100">
+                <GrPowerReset color="red" /> Clear
+              </Button>
+            </Col>
+            <Col sm className="mb-1">
+              <Button onClick={onBack} variant="primary" className="w-100">
+                <RiArrowGoBackFill color="black" /> Back
+              </Button>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
       <ToastContainer position="top-center" />
       <Modal
         title={
@@ -201,10 +195,10 @@ const UpdateItems = () => {
             Are you sure you want to delete {formData.label} ?
           </div>
           <div className="del-modal-btn">
-            <Button className="del-btn" onClick={deleteHandle}>
+            <Button variant="danger" onClick={deleteHandle}>
               Delete
             </Button>
-            <Button className="cancel-btn" onClick={() => setOpen(false)}>
+            <Button variant="primary" onClick={() => setOpen(false)}>
               Cancel
             </Button>
           </div>
