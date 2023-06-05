@@ -66,7 +66,6 @@ const HomePage = () => {
       >
         <Card.Body>
           <Card.Title>
-            {" "}
             Hi!{" "}
             {user != null ? (
               <span
