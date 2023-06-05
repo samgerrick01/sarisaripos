@@ -159,12 +159,13 @@ const UpdatedCredits = () => {
       >
         <Card.Body>
           <Card.Title>
-            <BsDatabaseAdd color="lime" /> Mag add ng item
+            <BsDatabaseAdd color="black" /> Mag add ng item
           </Card.Title>
           <Row className="mb-2">
             <Col>
               <Select
-                className="select-height w-100"
+                size="large"
+                className="w-100"
                 mode="combobox"
                 showSearch
                 value={formData.item}
@@ -200,6 +201,7 @@ const UpdatedCredits = () => {
           <Row>
             <Col>
               <FormControl
+                autoComplete="off"
                 disabled
                 type="number"
                 value={formData.price}
@@ -212,6 +214,7 @@ const UpdatedCredits = () => {
 
             <Col>
               <FormControl
+                autoComplete="off"
                 id="quantity"
                 type="number"
                 value={formData.qty}
@@ -237,7 +240,7 @@ const UpdatedCredits = () => {
                   justifyContent: "center",
                 }}
               >
-                <BsDatabaseAdd color="lime" /> Add
+                <BsDatabaseAdd color="black" /> Add
               </span>
             </Button>
           </Col>
@@ -255,7 +258,7 @@ const UpdatedCredits = () => {
                   justifyContent: "center",
                 }}
               >
-                <AiOutlineUnorderedList color="red" /> View Items
+                <AiOutlineUnorderedList color="black" /> View Items
               </span>
             </Button>
           </Col>
@@ -271,7 +274,7 @@ const UpdatedCredits = () => {
                   justifyContent: "center",
                 }}
               >
-                <GrPowerReset color="red" /> Clear
+                <GrPowerReset color="black" /> Clear
               </span>
             </Button>
           </Col>
@@ -285,7 +288,7 @@ const UpdatedCredits = () => {
                   justifyContent: "center",
                 }}
               >
-                <RiArrowGoBackFill color="blue" /> Back
+                <RiArrowGoBackFill color="black" /> Back
               </span>
             </Button>
           </Col>

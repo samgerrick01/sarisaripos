@@ -70,7 +70,7 @@ const AddName = () => {
       >
         <Card.Body>
           <Card.Title>
-            Add Profile <BsDatabaseAdd color="lime" />
+            <BsDatabaseAdd color="black" /> Add Profile
           </Card.Title>
 
           <Row>
@@ -89,12 +89,12 @@ const AddName = () => {
           <Row>
             <Col sm className="mb-3">
               <Button onClick={addItems} variant="success" className="w-100">
-                <BsDatabaseAdd color="lime" /> Add
+                <BsDatabaseAdd color="black" /> Add
               </Button>
             </Col>
             <Col sm className="mb-3">
               <Button onClick={onClear} variant="secondary" className="w-100">
-                <GrPowerReset color="red" /> Clear
+                <GrPowerReset color="black" /> Clear
               </Button>
             </Col>
             <Col sm className="mb-3">

@@ -54,12 +54,14 @@ const CreditList = () => {
         }}
       >
         <Card.Body>
-          <div className="d-flex justify-content-between w-100">
-            <label>
+          <div className="d-flex justify-content-between w-100 mb-1">
+            <label className="component-title">
               <AiOutlineUnorderedList color="red" />
               List of Credits
             </label>
-            <label>May Utang: {listOfCredits.length}</label>
+            <label className="component-title">
+              May Utang: {listOfCredits.length}
+            </label>
           </div>
 
           <FormControl
@@ -134,7 +136,7 @@ const CreditList = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <BsDatabaseAdd color="lime" /> I-Add ang uutang
+                  <BsDatabaseAdd color="black" /> I-Add ang uutang
                 </span>
               </Button>
             </Col>
@@ -151,7 +153,7 @@ const CreditList = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <RiArrowGoBackFill color="red" /> Back
+                  <RiArrowGoBackFill color="black" /> Back
                 </span>
               </Button>
             </Col>

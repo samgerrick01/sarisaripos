@@ -126,7 +126,7 @@ const UpdateItems = () => {
       >
         <Card.Body>
           <Card.Title>
-            Update Items <BsDatabaseAdd color="lime" />
+            <BsDatabaseAdd color="black" /> Update Items
           </Card.Title>
 
           <Row>
@@ -156,7 +156,7 @@ const UpdateItems = () => {
           <Row>
             <Col sm className="mb-1">
               <Button onClick={updateItem} variant="success" className="w-100">
-                <BsDatabaseAdd color="lime" /> Update
+                <BsDatabaseAdd color="black" /> Update
               </Button>
             </Col>
             <Col sm className="mb-1">
@@ -168,7 +168,7 @@ const UpdateItems = () => {
           <Row>
             <Col sm className="mb-1">
               <Button onClick={onClear} variant="secondary" className="w-100">
-                <GrPowerReset color="red" /> Clear
+                <GrPowerReset color="black" /> Clear
               </Button>
             </Col>
             <Col sm className="mb-1">

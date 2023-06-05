@@ -76,11 +76,14 @@ const HomePage = () => {
             <FaUserCircle />
           </Card.Title>
 
-          <div className="d-flex justify-content-between w-100">
-            <label>
-              List of Items <AiOutlineUnorderedList color="red" />
+          <div className="d-flex justify-content-between w-100 mb-1">
+            <label className="component-title ">
+              <AiOutlineUnorderedList color="red" />
+              List of Items
             </label>
-            <label>Total Items: {items.length}</label>
+            <label className="component-title ">
+              Total Items:{items.length}
+            </label>
           </div>
           <FormControl
             id="search"
@@ -155,7 +158,7 @@ const HomePage = () => {
                   className="w-100 mb-1"
                   onClick={addItems}
                 >
-                  <BsDatabaseAdd color="lime" /> Add Items
+                  <BsDatabaseAdd color="black" /> Add Items
                 </Button>
               </Col>
             )}
@@ -165,7 +168,7 @@ const HomePage = () => {
                 className="w-100 mb-1"
                 onClick={() => navigate("/credit-list")}
               >
-                <FaDollarSign color="lime" /> Credits
+                <FaDollarSign color="black" /> Credits
               </Button>
             </Col>
 
@@ -175,7 +178,7 @@ const HomePage = () => {
                 className="w-100 mb-1"
                 onClick={onLogout}
               >
-                <BiLogOutCircle color="red" /> Log Out
+                <BiLogOutCircle color="black" /> Log Out
               </Button>
             </Col>
           </Row>
