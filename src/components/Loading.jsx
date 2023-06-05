@@ -1,5 +1,6 @@
 import React from "react";
-import { Modal, Spin } from "antd";
+import { Modal } from "antd";
+import Spinner from "react-bootstrap/Spinner";
 import "../main.scss";
 import { useSelector } from "react-redux";
 
@@ -13,7 +14,7 @@ const Loading = () => {
       footer={false}
       closable={false}
     >
-      <Spin />
+      <Spinner />
     </Modal>
   );
 };
