@@ -21,6 +21,9 @@ import { AiOutlineUnorderedList } from "react-icons/ai";
 //bootstrap
 import { Row, Col, Button, FormControl, Card } from "react-bootstrap";
 
+let item = [];
+let total = 0;
+
 const UpdatedCredits = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,47 +38,38 @@ const UpdatedCredits = () => {
 
   const [openModal1, setOpenModal1] = useState(false);
 
-  const [totalC, setTotalC] = useState(0);
-
-  const [reqData, setReqData] = useState({
-    item: "",
-    total: 0,
-  });
+  const [openModal2, setOpenModal2] = useState(false);
 
   const [formData, setFormData] = useState({
+    id: "",
     item: "",
     price: "",
     qty: "",
     total: "",
   });
 
-  const parseItems = !selectedCredit.item ? "" : selectedCredit.item.split(",");
-
   useEffect(() => {
-    if (!items.length) {
-      axios
-        .get(`${baseUrl}/items`)
-        .then((res) => dispatch(getItems(res.data)))
-        .catch((err) => console.log(err));
-    }
-  }, []);
+    const idVal =
+      Object.keys(selectedCredit).length !== 0
+        ? selectedCredit.item.length !== 0 &&
+          selectedCredit.item[selectedCredit.item.length - 1].id
+        : 0;
 
-  useEffect(() => {
-    if (Object.keys(selectedCredit).length !== 0) {
-      setTotalC(
-        Object.keys(selectedCredit).length !== 0 ? selectedCredit.total : 0
-      );
-    }
+    setFormData({ ...formData, id: idVal + 1 });
   }, [selectedCredit]);
 
   const addItem = () => {
-    if (!formData.item || !formData.price || !formData.qty) {
+    if (!formData.item || !formData.qty) {
       toast.warning("Please Fill the Field!");
     } else {
+      item.push(formData);
+      total = total + formData.total;
       dispatch(loadingOn());
       axios
-        .put(`${baseUrl}/updateCredit/${id}`, reqData)
+        .put(`${baseUrl}/updateCredit/${id}`, { item, total })
         .then((res) => {
+          item = [];
+          total = 0;
           toast.success(res.data);
           dispatch(loadingOff());
           callSelectedAPI();
@@ -118,7 +112,13 @@ const UpdatedCredits = () => {
   const callSelectedAPI = () => {
     axios
       .post(`${baseUrl}/selectedCredit`, { id })
-      .then((res) => dispatch(setSelectedCredit(res.data)))
+      .then((res) => {
+        dispatch(setSelectedCredit(res.data));
+        if (res.data.item.length !== 0) {
+          item = item.concat(res.data.item);
+          total = res.data.total;
+        }
+      })
       .catch((err) => console.log(err));
   };
 
@@ -126,6 +126,14 @@ const UpdatedCredits = () => {
     if (!sessionStorage.getItem("user")) {
       Logout(dispatch, navigate);
     } else {
+      if (!items.length) {
+        axios
+          .get(`${baseUrl}/items`)
+          .then((res) => dispatch(getItems(res.data)))
+          .catch((err) => console.log(err));
+      }
+      total = 0;
+      item = [];
       callSelectedAPI();
     }
   }, []);
@@ -135,18 +143,30 @@ const UpdatedCredits = () => {
       ...formData,
       total: parseInt(formData.price) * parseInt(formData.qty) || "",
     });
-  }, [formData.qty, formData.price]);
+  }, [formData.qty]);
 
-  useEffect(() => {
-    setReqData({
-      ...reqData,
-      item: !selectedCredit.item
-        ? `${formData.item}/${formData.price}@${formData.qty}=${formData.total}`
-        : `${selectedCredit.item},${formData.item}/${formData.price}@${formData.qty}=${formData.total}`,
-      total: totalC + parseInt(formData.total) || 0,
-    });
-  }, [formData]);
+  const [itemToRemove, setItemToRemove] = useState(null);
+  const removeItem = () => {
+    let idx = item.findIndex((data) => data.id === itemToRemove.id);
+    item.splice(idx, 1);
+    total = total - itemToRemove.total;
+    dispatch(loadingOn());
+    axios
+      .put(`${baseUrl}/updateCredit/${id}`, { item, total })
+      .then((res) => {
+        item = [];
+        total = 0;
+        toast.success("Remove Success!");
+        dispatch(loadingOff());
+        callSelectedAPI();
+      })
+      .catch((err) => {
+        toast.error("Server Error!");
+        dispatch(loadingOff());
+      });
 
+    setOpenModal2(false);
+  };
   return (
     <div className="add-items">
       <Card
@@ -308,21 +328,69 @@ const UpdatedCredits = () => {
       >
         <div className="delete-modal">
           <div style={{ fontSize: "20px", overflow: "auto" }}>
-            {parseItems.length
-              ? parseItems.map((data, id) => (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "flex-start",
-                      fontSize: "14px",
-                    }}
-                    key={id}
-                  >
-                    {data}
-                  </div>
-                ))
-              : `Si ${selectedCredit.name} ay wala pang nauutang!`}
-            <div>Total: {selectedCredit.total}</div>
+            <div className="d-flex">
+              <div className="list-utang" style={{ width: "60%" }}>
+                Item
+              </div>
+              <div className="list-utang" style={{ width: "15%" }}>
+                Qty
+              </div>
+              <div className="list-utang" style={{ width: "25%" }}>
+                Total
+              </div>
+            </div>
+            <div style={{ maxHeight: "30vh", overflowY: "auto" }}>
+              {Object.keys(selectedCredit).length
+                ? selectedCredit.item.length !== 0 &&
+                  selectedCredit.item.map((data) => (
+                    <div
+                      onClick={() => {
+                        setItemToRemove(data);
+                        setOpenModal2(true);
+                      }}
+                      key={data.id}
+                      className="d-flex w-100"
+                      style={{ border: "1px solid black", padding: "2px" }}
+                    >
+                      <div
+                        style={{
+                          borderRight: "1px solid black",
+                          width: "60%",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {data.item}
+                      </div>
+                      <div
+                        style={{
+                          borderRight: "1px solid black",
+                          width: "15%",
+                          textAlign: "center",
+                        }}
+                      >
+                        {data.qty}
+                      </div>
+                      <div style={{ width: "25%", textAlign: "center" }}>
+                        {data.total}
+                      </div>
+                    </div>
+                  ))
+                : null}
+            </div>
+
+            {selectedCredit.total === 0 && (
+              <div className="d-flex justify-content-end">
+                Wala pa syang utang!
+              </div>
+            )}
+
+            {selectedCredit.total !== 0 && (
+              <div className="d-flex justify-content-end">
+                Total: {selectedCredit.total}
+              </div>
+            )}
           </div>
           <div className="del-modal-btn">
             {selectedCredit.total > 0 ? (
@@ -357,6 +425,31 @@ const UpdatedCredits = () => {
               Paid
             </Button>
             <Button variant="primary" onClick={() => setOpenModal1(false)}>
+              Cancel
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal
+        title={
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <IoWarning /> Remove Item
+          </div>
+        }
+        closable={false}
+        footer={false}
+        open={openModal2}
+      >
+        <div className="delete-modal">
+          <div style={{ fontSize: "20px", overflow: "auto" }}>
+            Remove {itemToRemove !== null && itemToRemove.item} ?
+          </div>
+          <div className="del-modal-btn">
+            <Button variant="danger" onClick={removeItem}>
+              Remove
+            </Button>
+            <Button variant="primary" onClick={() => setOpenModal2(false)}>
               Cancel
             </Button>
           </div>
