@@ -159,11 +159,19 @@ const UpdateItems = () => {
                 <BsDatabaseAdd color="black" /> Update
               </Button>
             </Col>
-            <Col sm className="mb-1">
-              <Button onClick={deleteItem} variant="danger" className="w-100">
-                <FaTrash color="black" /> Delete
-              </Button>
-            </Col>
+            {sessionStorage.getItem("user")
+              ? user.status === "administrator" && (
+                  <Col sm className="mb-1">
+                    <Button
+                      onClick={deleteItem}
+                      variant="danger"
+                      className="w-100"
+                    >
+                      <FaTrash color="black" /> Delete
+                    </Button>
+                  </Col>
+                )
+              : null}
           </Row>
           <Row>
             <Col sm className="mb-1">

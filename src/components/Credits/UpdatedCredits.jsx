@@ -196,7 +196,9 @@ const UpdatedCredits = () => {
                     item: e,
                     price: getPrice,
                   });
-                  document.getElementById("quantity").focus();
+                  if (e !== "Load") {
+                    document.getElementById("quantity").focus();
+                  }
                 }}
               >
                 {items
@@ -221,8 +223,9 @@ const UpdatedCredits = () => {
           <Row>
             <Col>
               <FormControl
+                id="presyo"
+                disabled={formData.item !== "Load"}
                 autoComplete="off"
-                disabled
                 type="number"
                 value={formData.price}
                 onChange={(e) =>
@@ -409,7 +412,9 @@ const UpdatedCredits = () => {
             ) : null}
             <div
               className={
-                selectedCredit.total === 0 && "d-flex justify-content-end w-100"
+                selectedCredit.total === 0
+                  ? "d-flex justify-content-end w-100"
+                  : ""
               }
             >
               <Button variant="primary" onClick={() => setOpenModal(false)}>
