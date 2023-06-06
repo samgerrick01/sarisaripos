@@ -1,8 +1,6 @@
 .delete-modal {
   & .table-list-items {
     max-height: 40vh;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
 
     overflow: overlay !important;
     &::-webkit-scrollbar {
@@ -11,15 +9,11 @@
     }
 
     & thead th {
-      outline: 1px solid black;
       position: sticky;
-      top: -5px;
+      top: 0;
+      z-index: 999;
       text-align: left;
       font-size: 20px;
-    }
-
-    & td {
-      border: 1px solid black;
     }
   }
   > .del-modal-btn {

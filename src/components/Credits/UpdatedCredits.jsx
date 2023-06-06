@@ -344,17 +344,13 @@ const UpdatedCredits = () => {
               <Table striped bordered hover variant="light" className="m-0">
                 <thead>
                   <tr>
-                    <th
-                      className="list-utang"
-                      style={{ width: "60%", borderRight: "1px solid black" }}
-                    >
+                    <th className="list-utang" style={{ width: "60%" }}>
                       Items
                     </th>
                     <th
-                      className="list-utang border-right border-dark"
+                      className="list-utang"
                       style={{
                         width: "15%",
-                        borderRight: "1px solid black",
                         textAlign: "center",
                       }}
                     >
@@ -409,7 +405,7 @@ const UpdatedCredits = () => {
             )}
 
             {selectedCredit.total !== 0 && (
-              <div className="d-flex justify-content-center border border-dark">
+              <div className="d-flex justify-content-center">
                 Total:
                 <span style={{ fontWeight: "bold", fontSize: "24px" }}>
                   {selectedCredit.total}
