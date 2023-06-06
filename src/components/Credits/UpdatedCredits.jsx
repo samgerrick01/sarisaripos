@@ -370,27 +370,27 @@ const UpdatedCredits = () => {
                       className="d-flex w-100"
                       style={{ border: "1px solid black", padding: "2px" }}
                     >
-                      <div
-                        style={{
-                          borderRight: "1px solid black",
-                          width: "60%",
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
-                      >
-                        {data.item}
-                      </div>
+                      <div className="text-item-detail">{data.item}</div>
                       <div
                         style={{
                           borderRight: "1px solid black",
                           width: "15%",
-                          textAlign: "center",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
                         }}
                       >
                         {data.qty}
                       </div>
-                      <div style={{ width: "25%", textAlign: "center" }}>
+                      <div
+                        style={{
+                          width: "25%",
+                          textAlign: "center",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
                         {data.total}
                       </div>
                     </div>
