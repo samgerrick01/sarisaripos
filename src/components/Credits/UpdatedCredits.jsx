@@ -327,6 +327,15 @@ const UpdatedCredits = () => {
         open={openModal}
       >
         <div className="delete-modal">
+          {selectedCredit.total !== 0 && (
+            <div
+              style={{ fontSize: "14px", color: "red" }}
+              className="d-flex justify-content-center"
+            >
+              ⬇️ Click the item to remove!⬇️
+            </div>
+          )}
+
           <div style={{ fontSize: "20px", overflow: "auto" }}>
             <div className="d-flex">
               <div className="list-utang" style={{ width: "60%" }}>
@@ -381,7 +390,7 @@ const UpdatedCredits = () => {
             </div>
 
             {selectedCredit.total === 0 && (
-              <div className="d-flex justify-content-end">
+              <div className="d-flex justify-content-center">
                 Wala pa syang utang!
               </div>
             )}
@@ -398,10 +407,15 @@ const UpdatedCredits = () => {
                 Paid
               </Button>
             ) : null}
-
-            <Button variant="primary" onClick={() => setOpenModal(false)}>
-              Cancel
-            </Button>
+            <div
+              className={
+                selectedCredit.total === 0 && "d-flex justify-content-end w-100"
+              }
+            >
+              <Button variant="primary" onClick={() => setOpenModal(false)}>
+                Cancel
+              </Button>
+            </div>
           </div>
         </div>
       </Modal>
