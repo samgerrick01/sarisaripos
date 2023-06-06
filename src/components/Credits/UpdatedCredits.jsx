@@ -321,7 +321,13 @@ const UpdatedCredits = () => {
       <ToastContainer position="top-center" />
       <Modal
         title={
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             List of Items
           </div>
         }
@@ -339,7 +345,7 @@ const UpdatedCredits = () => {
             </div>
           )}
 
-          <div style={{ fontSize: "20px", overflow: "auto" }}>
+          <div style={{ fontSize: "20px" }}>
             <div className="table-list-items">
               <Table striped bordered hover variant="light" className="m-0">
                 <thead>
@@ -405,7 +411,7 @@ const UpdatedCredits = () => {
             )}
 
             {selectedCredit.total !== 0 && (
-              <div className="d-flex justify-content-center">
+              <div className="d-flex justify-content-center mt-2">
                 Total:
                 <span style={{ fontWeight: "bold", fontSize: "24px" }}>
                   {selectedCredit.total}
@@ -415,7 +421,11 @@ const UpdatedCredits = () => {
           </div>
           <div className="del-modal-btn">
             {selectedCredit.total > 0 ? (
-              <Button variant="danger" onClick={() => setOpenModal1(true)}>
+              <Button
+                className="w-100"
+                variant="danger"
+                onClick={() => setOpenModal1(true)}
+              >
                 Paid
               </Button>
             ) : null}
@@ -426,7 +436,11 @@ const UpdatedCredits = () => {
                   : ""
               }
             >
-              <Button variant="primary" onClick={() => setOpenModal(false)}>
+              <Button
+                className="w-100"
+                variant="primary"
+                onClick={() => setOpenModal(false)}
+              >
                 Cancel
               </Button>
             </div>
@@ -436,8 +450,14 @@ const UpdatedCredits = () => {
 
       <Modal
         title={
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <IoWarning /> Warning
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            Delete Credit
           </div>
         }
         closable={false}
@@ -445,14 +465,18 @@ const UpdatedCredits = () => {
         open={openModal1}
       >
         <div className="delete-modal">
-          <div style={{ fontSize: "20px", overflow: "auto" }}>
+          <div style={{ fontSize: "20px", textAlign: "center" }}>
             Are you sure {selectedCredit.name} is paid?
           </div>
           <div className="del-modal-btn">
-            <Button variant="danger" onClick={paidHandle}>
+            <Button className="w-100" variant="danger" onClick={paidHandle}>
               Yes
             </Button>
-            <Button variant="primary" onClick={() => setOpenModal1(false)}>
+            <Button
+              className="w-100"
+              variant="primary"
+              onClick={() => setOpenModal1(false)}
+            >
               Cancel
             </Button>
           </div>
@@ -461,8 +485,14 @@ const UpdatedCredits = () => {
 
       <Modal
         title={
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <IoWarning /> Remove Item
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            Remove Item
           </div>
         }
         closable={false}
@@ -470,14 +500,18 @@ const UpdatedCredits = () => {
         open={openModal2}
       >
         <div className="delete-modal">
-          <div style={{ fontSize: "20px", overflow: "auto" }}>
+          <div style={{ fontSize: "20px", textAlign: "center" }}>
             Remove {itemToRemove !== null && itemToRemove.item} from item list?
           </div>
           <div className="del-modal-btn">
-            <Button variant="danger" onClick={removeItem}>
+            <Button className="w-100" variant="danger" onClick={removeItem}>
               Yes
             </Button>
-            <Button variant="primary" onClick={() => setOpenModal2(false)}>
+            <Button
+              className="w-100"
+              variant="primary"
+              onClick={() => setOpenModal2(false)}
+            >
               Cancel
             </Button>
           </div>

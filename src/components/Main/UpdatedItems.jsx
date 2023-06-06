@@ -189,8 +189,14 @@ const UpdateItems = () => {
       <ToastContainer position="top-center" />
       <Modal
         title={
-          <div style={{ display: "flex", alignItems: "center" }}>
-            Delete item
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            Delete Item
           </div>
         }
         closable={false}
@@ -198,14 +204,18 @@ const UpdateItems = () => {
         open={open}
       >
         <div className="delete-modal">
-          <div style={{ fontSize: "20px" }}>
+          <div style={{ fontSize: "20px", textAlign: "center" }}>
             Are you sure you want to delete {formData.label}?
           </div>
           <div className="del-modal-btn">
-            <Button variant="danger" onClick={deleteHandle}>
+            <Button className="w-100" variant="danger" onClick={deleteHandle}>
               Yes
             </Button>
-            <Button variant="primary" onClick={() => setOpen(false)}>
+            <Button
+              className="w-100"
+              variant="primary"
+              onClick={() => setOpen(false)}
+            >
               Cancel
             </Button>
           </div>

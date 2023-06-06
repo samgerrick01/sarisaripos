@@ -1,25 +1,66 @@
+@import "../../custom-variables";
+@import "bootstrap";
+
+:where(.css-dev-only-do-not-override-w8mnev).ant-modal .ant-modal-content {
+  @include media-breakpoint-down("sm") {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+}
+
 .delete-modal {
   & .table-list-items {
     max-height: 40vh;
-
+    border-collapse: separate;
+    border-spacing: 0;
+    border-bottom: 1px solid black;
     overflow: overlay !important;
     &::-webkit-scrollbar {
       width: 0px;
       height: 0px;
     }
 
-    & thead th {
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    table th {
+      /* Apply both top and bottom borders to the <th> */
+      border-top: 1px solid;
+      border-bottom: 1px solid;
+      border-right: 1px solid;
+    }
+
+    table td {
+      /* For cells, apply the border to one of each side only (right but not left, bottom but not top) */
+      border-bottom: 1px solid;
+      border-right: 1px solid;
+    }
+
+    table th:first-child,
+    table td:first-child {
+      /* Apply a left border on the first <td> or <th> in a row */
+      border-left: 1px solid;
+    }
+
+    table thead th {
       position: sticky;
       top: 0;
-      z-index: 999;
-      text-align: left;
-      font-size: 20px;
     }
+    // & thead th {
+    //   position: sticky;
+    //   top: 0;
+    //   z-index: 999;
+    //   text-align: left;
+    //   font-size: 20px;
+    //   border: 1px solid black;
+    // }
   }
   > .del-modal-btn {
     display: flex;
+    gap: 8px;
     padding: 12px;
-    justify-content: space-between;
   }
   & .del-btn {
     font-size: 24px;
