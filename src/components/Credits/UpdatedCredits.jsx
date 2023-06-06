@@ -406,7 +406,10 @@ const UpdatedCredits = () => {
 
             {selectedCredit.total !== 0 && (
               <div className="d-flex justify-content-end">
-                Total: {selectedCredit.total}
+                Total:
+                <span style={{ fontWeight: "bold", fontSize: "24px" }}>
+                  {selectedCredit.total}
+                </span>
               </div>
             )}
           </div>
