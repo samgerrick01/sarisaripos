@@ -19,7 +19,7 @@ import { getItems } from "../../redux/itemsSlice";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 
 //bootstrap
-import { Row, Col, Button, FormControl, Card } from "react-bootstrap";
+import { Row, Col, Button, FormControl, Card, Table } from "react-bootstrap";
 
 let item = [];
 let total = 0;
@@ -251,78 +251,78 @@ const UpdatedCredits = () => {
               />
             </Col>
           </Row>
+
+          <Row className="mt-3">
+            <Col sm className="mb-1">
+              <Button className="w-100" variant="success" onClick={addItem}>
+                <span
+                  style={{
+                    display: "flex",
+                    gap: "8px",
+                    justifyContent: "center",
+                  }}
+                >
+                  <BsDatabaseAdd color="black" /> Add
+                </span>
+              </Button>
+            </Col>
+
+            <Col sm className="mb-1">
+              <Button
+                className="w-100"
+                variant="warning"
+                onClick={() => setOpenModal(true)}
+              >
+                <span
+                  style={{
+                    display: "flex",
+                    gap: "8px",
+                    justifyContent: "center",
+                  }}
+                >
+                  <AiOutlineUnorderedList color="black" /> View Items
+                </span>
+              </Button>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col sm className="mb-1">
+              <Button className="w-100" variant="secondary" onClick={onClear}>
+                <span
+                  style={{
+                    display: "flex",
+                    gap: "8px",
+                    justifyContent: "center",
+                  }}
+                >
+                  <GrPowerReset color="black" /> Clear
+                </span>
+              </Button>
+            </Col>
+
+            <Col sm className="mb-1">
+              <Button className="w-100" variant="primary" onClick={onBack}>
+                <span
+                  style={{
+                    display: "flex",
+                    gap: "8px",
+                    justifyContent: "center",
+                  }}
+                >
+                  <RiArrowGoBackFill color="black" /> Back
+                </span>
+              </Button>
+            </Col>
+          </Row>
         </Card.Body>
-
-        <Row>
-          <Col sm className="mb-1">
-            <Button className="w-100" variant="success" onClick={addItem}>
-              <span
-                style={{
-                  display: "flex",
-                  gap: "8px",
-                  justifyContent: "center",
-                }}
-              >
-                <BsDatabaseAdd color="black" /> Add
-              </span>
-            </Button>
-          </Col>
-
-          <Col sm className="mb-1">
-            <Button
-              className="w-100"
-              variant="warning"
-              onClick={() => setOpenModal(true)}
-            >
-              <span
-                style={{
-                  display: "flex",
-                  gap: "8px",
-                  justifyContent: "center",
-                }}
-              >
-                <AiOutlineUnorderedList color="black" /> View Items
-              </span>
-            </Button>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col sm className="mb-1">
-            <Button className="w-100" variant="secondary" onClick={onClear}>
-              <span
-                style={{
-                  display: "flex",
-                  gap: "8px",
-                  justifyContent: "center",
-                }}
-              >
-                <GrPowerReset color="black" /> Clear
-              </span>
-            </Button>
-          </Col>
-
-          <Col sm className="mb-1">
-            <Button className="w-100" variant="primary" onClick={onBack}>
-              <span
-                style={{
-                  display: "flex",
-                  gap: "8px",
-                  justifyContent: "center",
-                }}
-              >
-                <RiArrowGoBackFill color="black" /> Back
-              </span>
-            </Button>
-          </Col>
-        </Row>
       </Card>
 
       <ToastContainer position="top-center" />
       <Modal
         title={
           <div style={{ display: "flex", alignItems: "center" }}>
-            <IoWarning /> List of Items
+            List of Items
           </div>
         }
         closable={false}
@@ -340,62 +340,66 @@ const UpdatedCredits = () => {
           )}
 
           <div style={{ fontSize: "20px", overflow: "auto" }}>
-            <div className="d-flex">
-              <div className="list-utang" style={{ width: "60%" }}>
-                Item
-              </div>
-              <div
-                className="list-utang d-flex justify-content-center"
-                style={{ width: "15%" }}
-              >
-                Qty
-              </div>
-              <div
-                className="list-utang d-flex justify-content-center"
-                style={{ width: "25%" }}
-              >
-                Total
-              </div>
-            </div>
-            <div style={{ maxHeight: "30vh", overflowY: "auto" }}>
-              {Object.keys(selectedCredit).length
-                ? selectedCredit.item.length !== 0 &&
-                  selectedCredit.item.map((data) => (
-                    <div
-                      onClick={() => {
-                        setItemToRemove(data);
-                        setOpenModal2(true);
-                      }}
-                      key={data.id}
-                      className="d-flex w-100"
-                      style={{ border: "1px solid black", padding: "2px" }}
+            <div className="table-list-items">
+              <Table striped bordered hover variant="light" className="m-0">
+                <thead>
+                  <tr>
+                    <th
+                      className="list-utang"
+                      style={{ width: "60%", borderRight: "1px solid black" }}
                     >
-                      <div className="text-item-detail">{data.item}</div>
-                      <div
-                        style={{
-                          borderRight: "1px solid black",
-                          width: "15%",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        {data.qty}
-                      </div>
-                      <div
-                        style={{
-                          width: "25%",
-                          textAlign: "center",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        {data.total}
-                      </div>
-                    </div>
-                  ))
-                : null}
+                      Items
+                    </th>
+                    <th
+                      className="list-utang border-right border-dark"
+                      style={{
+                        width: "15%",
+                        borderRight: "1px solid black",
+                        textAlign: "center",
+                      }}
+                    >
+                      Qty
+                    </th>
+                    <th
+                      className="list-utang"
+                      style={{ width: "25%", textAlign: "center" }}
+                    >
+                      Total
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.keys(selectedCredit).length
+                    ? selectedCredit.item.length !== 0 &&
+                      selectedCredit.item.map((data) => (
+                        <tr
+                          onClick={() => {
+                            setItemToRemove(data);
+                            setOpenModal2(true);
+                          }}
+                        >
+                          <td style={{ width: "60%" }}>{data.item}</td>
+                          <td
+                            style={{
+                              width: "15%",
+                              textAlign: "center",
+                            }}
+                          >
+                            {data.qty}
+                          </td>
+                          <td
+                            style={{
+                              width: "25%",
+                              textAlign: "center",
+                            }}
+                          >
+                            {data.total}
+                          </td>
+                        </tr>
+                      ))
+                    : null}
+                </tbody>
+              </Table>
             </div>
 
             {selectedCredit.total === 0 && (
@@ -405,7 +409,7 @@ const UpdatedCredits = () => {
             )}
 
             {selectedCredit.total !== 0 && (
-              <div className="d-flex justify-content-end">
+              <div className="d-flex justify-content-center border border-dark">
                 Total:
                 <span style={{ fontWeight: "bold", fontSize: "24px" }}>
                   {selectedCredit.total}
@@ -446,11 +450,11 @@ const UpdatedCredits = () => {
       >
         <div className="delete-modal">
           <div style={{ fontSize: "20px", overflow: "auto" }}>
-            Are you sure {selectedCredit.name} is paid ?
+            Are you sure {selectedCredit.name} is paid?
           </div>
           <div className="del-modal-btn">
             <Button variant="danger" onClick={paidHandle}>
-              Paid
+              Yes
             </Button>
             <Button variant="primary" onClick={() => setOpenModal1(false)}>
               Cancel
@@ -471,11 +475,11 @@ const UpdatedCredits = () => {
       >
         <div className="delete-modal">
           <div style={{ fontSize: "20px", overflow: "auto" }}>
-            Remove {itemToRemove !== null && itemToRemove.item} ?
+            Remove {itemToRemove !== null && itemToRemove.item} from item list?
           </div>
           <div className="del-modal-btn">
             <Button variant="danger" onClick={removeItem}>
-              Remove
+              Yes
             </Button>
             <Button variant="primary" onClick={() => setOpenModal2(false)}>
               Cancel

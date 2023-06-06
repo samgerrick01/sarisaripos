@@ -57,7 +57,7 @@ const CreditList = () => {
           <div className="d-flex justify-content-between w-100 mb-1">
             <label className="component-title">
               <AiOutlineUnorderedList color="red" />
-              List of Credits
+              List of Creditors
             </label>
             <label className="component-title">
               May Utang: {listOfCredits.length}
@@ -65,7 +65,7 @@ const CreditList = () => {
           </div>
 
           <FormControl
-            placeholder="Seach items here"
+            placeholder="Seach name here"
             onChange={(e) => setQuery(e.target.value)}
           />
 

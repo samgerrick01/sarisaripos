@@ -13,7 +13,6 @@ import { BsDatabaseAdd } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { FaTrash } from "react-icons/fa";
-import { IoWarning } from "react-icons/io5";
 import { Logout } from "../../functions";
 //antd
 import { Modal } from "antd";
@@ -191,7 +190,7 @@ const UpdateItems = () => {
       <Modal
         title={
           <div style={{ display: "flex", alignItems: "center" }}>
-            <IoWarning /> Warning!
+            Delete item
           </div>
         }
         closable={false}
@@ -200,11 +199,11 @@ const UpdateItems = () => {
       >
         <div className="delete-modal">
           <div style={{ fontSize: "20px" }}>
-            Are you sure you want to delete {formData.label} ?
+            Are you sure you want to delete {formData.label}?
           </div>
           <div className="del-modal-btn">
             <Button variant="danger" onClick={deleteHandle}>
-              Delete
+              Yes
             </Button>
             <Button variant="primary" onClick={() => setOpen(false)}>
               Cancel

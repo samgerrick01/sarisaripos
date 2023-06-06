@@ -65,15 +65,8 @@ const HomePage = () => {
         }}
       >
         <Card.Body>
-          <Card.Title>
-            Hi!{" "}
-            {user != null ? (
-              <span
-                style={{ textTransform: "capitalize", fontSize: "1.25rem" }}
-              >
-                {user.username}
-              </span>
-            ) : null}{" "}
+          <Card.Title className="card-title m-0">
+            Hi! {user != null ? <span>{user.username}</span> : null}{" "}
             <FaUserCircle />
           </Card.Title>
 
@@ -89,7 +82,7 @@ const HomePage = () => {
           <FormControl
             id="search"
             type="text"
-            placeholder="Search"
+            placeholder="Search item here"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoComplete="off"
