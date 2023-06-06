@@ -344,10 +344,16 @@ const UpdatedCredits = () => {
               <div className="list-utang" style={{ width: "60%" }}>
                 Item
               </div>
-              <div className="list-utang" style={{ width: "15%" }}>
+              <div
+                className="list-utang d-flex justify-content-center"
+                style={{ width: "15%" }}
+              >
                 Qty
               </div>
-              <div className="list-utang" style={{ width: "25%" }}>
+              <div
+                className="list-utang d-flex justify-content-center"
+                style={{ width: "25%" }}
+              >
                 Total
               </div>
             </div>
