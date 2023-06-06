@@ -107,17 +107,17 @@ const Home = () => {
           <Row>
             <Col sm className="mb-3">
               <Button onClick={onSubmit} variant="primary" className="w-100">
-                <CgLogIn color="lime" /> Login
+                <CgLogIn color="black" /> Login
               </Button>
             </Col>
             <Col sm className="mb-3">
               <Button onClick={onClear} variant="secondary" className="w-100">
-                <GrPowerReset color="red" /> Clear
+                <GrPowerReset color="black" /> Clear
               </Button>
             </Col>
           </Row>
           <div className="w-100 d-flex justify-content-end">
-            <label>v1.2</label>
+            <label>v1.3</label>
           </div>
         </Card.Body>
       </Card>
