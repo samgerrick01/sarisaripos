@@ -328,7 +328,7 @@ const UpdatedCredits = () => {
               justifyContent: "center",
             }}
           >
-            List of Items
+            {selectedCredit.total === 0 ? "Notice" : "List of Items"}
           </div>
         }
         closable={false}
@@ -346,67 +346,70 @@ const UpdatedCredits = () => {
           )}
 
           <div style={{ fontSize: "20px" }}>
-            <div className="table-list-items">
-              <Table striped bordered hover variant="light" className="m-0">
-                <thead>
-                  <tr>
-                    <th className="list-utang" style={{ width: "60%" }}>
-                      Items
-                    </th>
-                    <th
-                      className="list-utang"
-                      style={{
-                        width: "15%",
-                        textAlign: "center",
-                      }}
-                    >
-                      Qty
-                    </th>
-                    <th
-                      className="list-utang"
-                      style={{ width: "25%", textAlign: "center" }}
-                    >
-                      Total
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.keys(selectedCredit).length
-                    ? selectedCredit.item.length !== 0 &&
-                      selectedCredit.item.map((data) => (
-                        <tr
-                          onClick={() => {
-                            setItemToRemove(data);
-                            setOpenModal2(true);
-                          }}
-                        >
-                          <td style={{ width: "60%" }}>{data.item}</td>
-                          <td
-                            style={{
-                              width: "15%",
-                              textAlign: "center",
+            {selectedCredit.total !== 0 && (
+              <div className="table-list-items">
+                <Table striped bordered hover variant="light" className="m-0">
+                  <thead>
+                    <tr>
+                      <th className="list-utang" style={{ width: "60%" }}>
+                        Items
+                      </th>
+                      <th
+                        className="list-utang"
+                        style={{
+                          width: "15%",
+                          textAlign: "center",
+                        }}
+                      >
+                        Qty
+                      </th>
+                      <th
+                        className="list-utang"
+                        style={{ width: "25%", textAlign: "center" }}
+                      >
+                        Total
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.keys(selectedCredit).length
+                      ? selectedCredit.item.length !== 0 &&
+                        selectedCredit.item.map((data) => (
+                          <tr
+                            key={data.id}
+                            onClick={() => {
+                              setItemToRemove(data);
+                              setOpenModal2(true);
                             }}
                           >
-                            {data.qty}
-                          </td>
-                          <td
-                            style={{
-                              width: "25%",
-                              textAlign: "center",
-                            }}
-                          >
-                            {data.total}
-                          </td>
-                        </tr>
-                      ))
-                    : null}
-                </tbody>
-              </Table>
-            </div>
+                            <td style={{ width: "60%" }}>{data.item}</td>
+                            <td
+                              style={{
+                                width: "15%",
+                                textAlign: "center",
+                              }}
+                            >
+                              {data.qty}
+                            </td>
+                            <td
+                              style={{
+                                width: "25%",
+                                textAlign: "center",
+                              }}
+                            >
+                              {data.total}
+                            </td>
+                          </tr>
+                        ))
+                      : null}
+                  </tbody>
+                </Table>
+              </div>
+            )}
 
             {selectedCredit.total === 0 && (
               <div className="d-flex justify-content-center">
-                Wala pa syang utang!
+                Delete this data?
               </div>
             )}
 
@@ -420,30 +423,27 @@ const UpdatedCredits = () => {
             )}
           </div>
           <div className="del-modal-btn">
-            {selectedCredit.total > 0 ? (
-              <Button
-                className="w-100"
-                variant="danger"
-                onClick={() => setOpenModal1(true)}
-              >
-                Paid
-              </Button>
-            ) : null}
-            <div
-              className={
-                selectedCredit.total === 0
-                  ? "d-flex justify-content-end w-100"
-                  : ""
-              }
+            <Button
+              className="w-100"
+              variant="danger"
+              onClick={() => {
+                if (selectedCredit.total !== 0) {
+                  setOpenModal1(true);
+                } else {
+                  paidHandle();
+                }
+              }}
             >
-              <Button
-                className="w-100"
-                variant="primary"
-                onClick={() => setOpenModal(false)}
-              >
-                Cancel
-              </Button>
-            </div>
+              {selectedCredit.total === 0 ? "Yes" : "Paid"}
+            </Button>
+
+            <Button
+              className="w-100"
+              variant="primary"
+              onClick={() => setOpenModal(false)}
+            >
+              {selectedCredit.total === 0 ? "Okay" : "Cancel"}
+            </Button>
           </div>
         </div>
       </Modal>
