@@ -442,7 +442,7 @@ const UpdatedCredits = () => {
               variant="primary"
               onClick={() => setOpenModal(false)}
             >
-              {selectedCredit.total === 0 ? "Okay" : "Cancel"}
+              {selectedCredit.total === 0 ? "No" : "Cancel"}
             </Button>
           </div>
         </div>

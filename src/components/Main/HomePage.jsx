@@ -128,6 +128,7 @@ const HomePage = () => {
                             navigate(`/update/${data.id}`);
                           }
                         }}
+                        style={{ cursor: "pointer" }}
                       >
                         <td>{data.label}</td>
                         <td

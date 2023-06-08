@@ -104,7 +104,7 @@ const CreditList = () => {
                       <tr
                         key={data.id}
                         onClick={() => navigate(`/updatecredit/${data.id}`)}
-                        style={{ height: "52px" }}
+                        style={{ cursor: "pointer", height: "52px" }}
                       >
                         <td>{data.name}</td>
                         <td
