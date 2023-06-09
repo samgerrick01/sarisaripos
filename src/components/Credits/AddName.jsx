@@ -22,7 +22,7 @@ const AddName = () => {
   const [formData, setFormData] = useState({
     name: "",
     item: "",
-    total: 0,
+    total: "0.00",
   });
 
   const addItems = (e) => {

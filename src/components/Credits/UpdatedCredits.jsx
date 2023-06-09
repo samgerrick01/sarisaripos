@@ -12,8 +12,7 @@ import { loadingOff, loadingOn } from "../../redux/loadingSlice";
 import { BsDatabaseAdd } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
 import { RiArrowGoBackFill } from "react-icons/ri";
-import { IoWarning } from "react-icons/io5";
-import { Logout } from "../../functions";
+import { Logout, formatToCurrency } from "../../functions";
 import { setSelectedCredit } from "../../redux/creditSlice";
 import { getItems } from "../../redux/itemsSlice";
 import { AiOutlineUnorderedList } from "react-icons/ai";
@@ -63,7 +62,7 @@ const UpdatedCredits = () => {
       toast.warning("Please Fill the Field!");
     } else {
       item.push(formData);
-      total = total + formData.total;
+      total = parseFloat(total) + parseFloat(formData.total);
       dispatch(loadingOn());
       axios
         .put(`${baseUrl}/updateCredit/${id}`, { item, total })
@@ -141,7 +140,7 @@ const UpdatedCredits = () => {
   useEffect(() => {
     setFormData({
       ...formData,
-      total: parseInt(formData.price) * parseInt(formData.qty) || "",
+      total: parseFloat(formData.price) * parseFloat(formData.qty) || "",
     });
   }, [formData.qty]);
 
@@ -167,6 +166,7 @@ const UpdatedCredits = () => {
 
     setOpenModal2(false);
   };
+
   return (
     <div className="add-items">
       <Card
@@ -397,7 +397,7 @@ const UpdatedCredits = () => {
                                 textAlign: "center",
                               }}
                             >
-                              {data.total}
+                              {formatToCurrency(data.total)}
                             </td>
                           </tr>
                         ))
@@ -417,7 +417,7 @@ const UpdatedCredits = () => {
               <div className="d-flex justify-content-center mt-2">
                 Total:
                 <span style={{ fontWeight: "bold", fontSize: "24px" }}>
-                  {selectedCredit.total}
+                  {formatToCurrency(selectedCredit.total)}
                 </span>
               </div>
             )}

@@ -7,7 +7,7 @@ import { baseUrl } from "../../api";
 import { BsDatabaseAdd } from "react-icons/bs";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { RiArrowGoBackFill } from "react-icons/ri";
-import { Logout } from "../../functions";
+import { Logout, formatToCurrency, getClassName } from "../../functions";
 import { getCredits } from "../../redux/creditSlice";
 
 import { Input } from "antd";
@@ -37,14 +37,10 @@ const CreditList = () => {
     let total = 0;
 
     value.forEach((el) => {
-      total += el.total;
+      total += parseFloat(el.total);
     });
 
-    if (total.toString().includes(".")) {
-      return total;
-    } else {
-      return `${total}.00`;
-    }
+    return total;
   };
 
   //Load the Items
@@ -136,14 +132,14 @@ const CreditList = () => {
                         onClick={() => navigate(`/updatecredit/${data.id}`)}
                         style={{ cursor: "pointer", height: "52px" }}
                       >
-                        <td>{data.name}</td>
+                        <td className="ps-1">{data.name}</td>
                         <td
                           style={{
                             width: "20%",
                             textAlign: "center",
                           }}
                         >
-                          {data.total}
+                          {formatToCurrency(data.total)}
                         </td>
                       </tr>
                     ))}
@@ -152,8 +148,11 @@ const CreditList = () => {
             )}
           </div>
 
-          <div className="d-flex justify-content-center w-100 mb-2 fw-bold text-black">
-            Total : ₱ {totalCredits(listOfCredits)}
+          <div
+            className="d-flex justify-content-center w-100 mb-2 fw-bold"
+            style={getClassName(totalCredits(listOfCredits))}
+          >
+            Total : {formatToCurrency(totalCredits(listOfCredits))}
           </div>
 
           <Row>

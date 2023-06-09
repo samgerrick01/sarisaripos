@@ -9,7 +9,7 @@ import { BsDatabaseAdd } from "react-icons/bs";
 import { BiLogOutCircle } from "react-icons/bi";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { FaUserCircle, FaDollarSign } from "react-icons/fa";
-import { Logout } from "../../functions";
+import { Logout, formatToCurrency } from "../../functions";
 
 import { Input } from "antd";
 
@@ -147,14 +147,14 @@ const HomePage = () => {
                         }}
                         style={{ cursor: "pointer" }}
                       >
-                        <td>{data.label}</td>
+                        <td className="ps-1">{data.label}</td>
                         <td
                           style={{
                             width: "20%",
                             textAlign: "center",
                           }}
                         >
-                          {data.price}
+                          {formatToCurrency(data.price)}
                         </td>
                       </tr>
                     ))}

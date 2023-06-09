@@ -10,3 +10,22 @@ export const Logout = async (dispatch, navigate) => {
   sessionStorage.removeItem("user");
   navigate("/");
 };
+
+export const getClassName = (value) => {
+  if (value < 100) {
+    return { color: "black" };
+  } else if (value >= 101 && value <= 250) {
+    return { color: "yellow" };
+  } else {
+    return { color: "red" };
+  }
+};
+
+export const formatToCurrency = (number) => {
+  const formatter = new Intl.NumberFormat("en-PH", {
+    style: "currency",
+    currency: "PHP",
+  });
+
+  return formatter.format(number);
+};

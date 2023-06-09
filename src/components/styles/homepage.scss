@@ -82,11 +82,17 @@
     border-bottom: 1px solid;
     border-right: 1px solid;
 
+    @include media-breakpoint-down("sm") {
+      font-size: 18px;
+      padding: 8px 0;
+    }
     @include media-breakpoint-down("xsm") {
       font-size: 16px;
+      padding: 8px 0;
     }
     @include media-breakpoint-down("xs") {
-      font-size: 12px;
+      font-size: 14px;
+      padding: 8px 0;
     }
   }
 

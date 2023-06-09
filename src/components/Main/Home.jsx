@@ -117,7 +117,7 @@ const Home = () => {
             </Col>
           </Row>
           <div className="w-100 d-flex justify-content-end">
-            <label>v1.4</label>
+            <label>v2.0</label>
           </div>
         </Card.Body>
       </Card>
