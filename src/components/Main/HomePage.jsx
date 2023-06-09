@@ -11,6 +11,8 @@ import { AiOutlineUnorderedList } from "react-icons/ai";
 import { FaUserCircle, FaDollarSign } from "react-icons/fa";
 import { Logout } from "../../functions";
 
+import { Input } from "antd";
+
 //bootstrap
 import {
   Row,
@@ -79,13 +81,28 @@ const HomePage = () => {
               Total Items:{items.length}
             </label>
           </div>
-          <FormControl
+          {/* <FormControl
             id="search"
             type="text"
             placeholder="Search item here"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoComplete="off"
+          /> */}
+          <Input
+            id="search"
+            type="text"
+            placeholder="Search item here"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            autoComplete="off"
+            allowClear
+            style={{
+              height: "52px",
+              fontWeight: "400",
+              fontSize: "1rem",
+              borderRadius: "0.375rem",
+            }}
           />
 
           {/* Table */}

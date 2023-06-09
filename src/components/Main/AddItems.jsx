@@ -36,6 +36,7 @@ const AddItems = () => {
         .then((res) => {
           toast.success(res.data);
           dispatch(loadingOff());
+          setFormData({ barcode: "1", label: "", price: "", stocks: "1" });
         })
         .catch((err) => {
           toast.error("Server Error!");

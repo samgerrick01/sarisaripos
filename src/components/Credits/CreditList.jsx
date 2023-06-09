@@ -10,6 +10,8 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 import { Logout } from "../../functions";
 import { getCredits } from "../../redux/creditSlice";
 
+import { Input } from "antd";
+
 //bootstrap
 import {
   Row,
@@ -64,9 +66,23 @@ const CreditList = () => {
             </label>
           </div>
 
-          <FormControl
+          {/* <FormControl
             placeholder="Seach name here"
             onChange={(e) => setQuery(e.target.value)}
+          /> */}
+
+          <Input
+            placeholder="Seach name here"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            autoComplete="off"
+            allowClear
+            style={{
+              height: "52px",
+              fontWeight: "400",
+              fontSize: "1rem",
+              borderRadius: "0.375rem",
+            }}
           />
 
           <div className="home-table">
