@@ -33,6 +33,20 @@ const CreditList = () => {
 
   const [query, setQuery] = useState("");
 
+  const totalCredits = (value) => {
+    let total = 0;
+
+    value.forEach((el) => {
+      total += el.total;
+    });
+
+    if (total.toString().includes(".")) {
+      return total;
+    } else {
+      return `${total}.00`;
+    }
+  };
+
   //Load the Items
   useEffect(() => {
     if (!sessionStorage.getItem("user")) {
@@ -136,6 +150,10 @@ const CreditList = () => {
                 </tbody>
               </Table>
             )}
+          </div>
+
+          <div className="d-flex justify-content-center w-100 mb-2 fw-bold text-black">
+            Total : ₱ {totalCredits(listOfCredits)}
           </div>
 
           <Row>
