@@ -198,7 +198,11 @@ const UpdatedCredits = () => {
                                         item: e,
                                         price: getPrice,
                                     })
-                                    if (e !== 'Load') {
+                                    if (
+                                        e !== 'Load' &&
+                                        e !== 'Gcash' &&
+                                        e !== 'Pera'
+                                    ) {
                                         document
                                             .getElementById('quantity')
                                             .focus()
@@ -235,7 +239,11 @@ const UpdatedCredits = () => {
                         <Col>
                             <FormControl
                                 id="presyo"
-                                disabled={formData.item !== 'Load'}
+                                disabled={
+                                    formData.item !== 'Load' &&
+                                    formData.item !== 'Gcash' &&
+                                    formData.item !== 'Pera'
+                                }
                                 autoComplete="off"
                                 type="number"
                                 value={formData.price}
