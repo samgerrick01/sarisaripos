@@ -1,33 +1,33 @@
-@import "bootstrap";
-@import "../../custom-variables";
+@import 'bootstrap';
+@import '../../custom-variables';
 
 .add-items {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  background-color: lightslategray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: lightslategray;
 
-  & .card-body {
-    @include media-breakpoint-down("sm") {
-      padding: 0px;
+    & .card-body {
+        @include media-breakpoint-down('sm') {
+            padding: 0px;
+        }
     }
-  }
 }
 
 .list-utang {
-  font-size: 24px !important;
+    font-size: 24px !important;
 
-  @include media-breakpoint-down("sm") {
-    font-size: 16px !important;
-  }
+    @include media-breakpoint-down('sm') {
+        font-size: 16px !important;
+    }
 }
 
 .text-item-detail {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  border-right: 1px solid black;
-  width: 60%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-right: 1px solid black;
+    width: 60%;
 }

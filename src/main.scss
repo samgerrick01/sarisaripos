@@ -1,35 +1,35 @@
-@import "bootstrap";
-@import "./custom-variables";
+@import 'bootstrap';
+@import './custom-variables';
 
 * {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 span {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 .div-center {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .modal-antd {
-  > .ant-modal-content {
-    width: fit-content;
-  }
+    > .ant-modal-content {
+        width: fit-content;
+    }
 }
 
 .ant-modal-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .ant-modal {
-  top: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  transform: none !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
 }
