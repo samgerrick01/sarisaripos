@@ -12,6 +12,7 @@ import axios from 'axios'
 import { FaTrash, FaCheck, FaUndo } from 'react-icons/fa'
 import { BsDatabaseAdd } from 'react-icons/bs'
 import { RiArrowGoBackFill } from 'react-icons/ri'
+import { loadingOff, loadingOn } from '../../redux/loadingSlice'
 
 const ViewListahan = () => {
     const dispatch = useDispatch()
@@ -36,14 +37,19 @@ const ViewListahan = () => {
 
     //Delete
     const deleteItem = (data) => {
+        dispatch(loadingOn())
         axios
             .delete(`${baseUrl}/deleteToListahan/${data.id}`)
             .then((res) => {
+                dispatch(loadingOff())
                 if (res.data === 'Deleted') {
                     getListahanList()
                 }
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                dispatch(loadingOff())
+                console.log(err)
+            })
     }
 
     //Load the Listahan Items
