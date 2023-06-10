@@ -199,6 +199,16 @@ const HomePage = () => {
 
                         <Col sm>
                             <Button
+                                variant="warning"
+                                className="w-100 mb-1"
+                                onClick={() => navigate('/listahan')}
+                            >
+                                <BsDatabaseAdd color="black" /> Online Listahan
+                            </Button>
+                        </Col>
+
+                        <Col sm>
+                            <Button
                                 variant="danger"
                                 className="w-100 mb-1"
                                 onClick={onLogout}

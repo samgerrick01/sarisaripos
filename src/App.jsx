@@ -7,6 +7,9 @@ import Loading from './components/Loading'
 import CreditList from './components/Credits/CreditList'
 import AddName from './components/Credits/AddName'
 import UpdatedCredits from './components/Credits/UpdatedCredits'
+import ViewListahan from './components/Listahan/ViewListahan'
+import AddLista from './components/Listahan/AddLista'
+import UpdateLista from './components/Listahan/UpdateLista'
 
 function App() {
     return (
@@ -19,6 +22,9 @@ function App() {
                 <Route path="/credit-list" element={<CreditList />} />
                 <Route path="/add-name" element={<AddName />} />
                 <Route path="/updatecredit/:id" element={<UpdatedCredits />} />
+                <Route path="/listahan" element={<ViewListahan />} />
+                <Route path="/add-lista" element={<AddLista />} />
+                <Route path="/update-lista/:id" element={<UpdateLista />} />
             </Routes>
             <Loading />
         </BrowserRouter>

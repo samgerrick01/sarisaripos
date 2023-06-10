@@ -29,3 +29,11 @@ export const formatToCurrency = (number) => {
 
     return formatter.format(number)
 }
+
+export const checkIfDone = (value) => {
+    if (value === true || value === 1) {
+        return { textDecoration: 'line-through', color: 'green' }
+    } else {
+        return { color: 'red' }
+    }
+}
