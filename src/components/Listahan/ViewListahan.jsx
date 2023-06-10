@@ -23,16 +23,21 @@ const ViewListahan = () => {
 
     //Change Status
     const setStatus = (data) => {
+        dispatch(loadingOn())
         axios
             .put(`${baseUrl}/changeStatus/${data.id}`, {
                 status: data.status ? 0 : 1,
             })
             .then((res) => {
+                dispatch(loadingOff())
                 if (res.data === 'Updated') {
                     getListahanList()
                 }
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                dispatch(loadingOff())
+                console.log(err)
+            })
     }
 
     //Delete
