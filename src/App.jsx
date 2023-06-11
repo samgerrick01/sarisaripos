@@ -10,10 +10,12 @@ import UpdatedCredits from './components/Credits/UpdatedCredits'
 import ViewListahan from './components/Listahan/ViewListahan'
 import AddLista from './components/Listahan/AddLista'
 import UpdateLista from './components/Listahan/UpdateLista'
+import Nav from './components/Nav'
 
 function App() {
     return (
         <BrowserRouter>
+            <Nav />
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route path="/add-items" element={<AddItems />} />

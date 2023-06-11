@@ -15,6 +15,9 @@ import { GrPowerReset } from 'react-icons/gr'
 // import { Input, Button } from "antd";
 //bootstrap
 import { Row, Col, Button, FormControl, Card } from 'react-bootstrap'
+import { Layout } from 'antd'
+
+const { Header, Footer, Sider, Content } = Layout
 
 const Home = () => {
     const navigate = useNavigate()

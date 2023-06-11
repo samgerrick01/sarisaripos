@@ -187,7 +187,7 @@ const HomePage = () => {
                                 </Col>
                             )
                         ) : null}
-                        <Col sm>
+                        {/* <Col sm>
                             <Button
                                 variant="primary"
                                 className="w-100 mb-1"
@@ -195,9 +195,9 @@ const HomePage = () => {
                             >
                                 <FaDollarSign color="black" /> Credits
                             </Button>
-                        </Col>
+                        </Col> */}
 
-                        <Col sm>
+                        {/* <Col sm>
                             <Button
                                 variant="warning"
                                 className="w-100 mb-1"
@@ -205,9 +205,9 @@ const HomePage = () => {
                             >
                                 <BsDatabaseAdd color="black" /> Online Listahan
                             </Button>
-                        </Col>
+                        </Col> */}
 
-                        <Col sm>
+                        {/* <Col sm>
                             <Button
                                 variant="danger"
                                 className="w-100 mb-1"
@@ -215,7 +215,7 @@ const HomePage = () => {
                             >
                                 <BiLogOutCircle color="black" /> Log Out
                             </Button>
-                        </Col>
+                        </Col> */}
                     </Row>
                 </Card.Body>
             </Card>
