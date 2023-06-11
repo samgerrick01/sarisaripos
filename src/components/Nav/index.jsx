@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './navItem.scss'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
@@ -10,17 +10,30 @@ function index() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [click, setClick] = useState(false)
+    const [user, setUser] = useState('')
 
     const handleClick = () => {
         setClick(!click)
     }
+
+    useEffect(() => {
+        if (sessionStorage.getItem('user')) {
+            let data = JSON.parse(sessionStorage.getItem('user'))
+            setUser(`Hi! ${data.username}`)
+        } else {
+            setUser('De Silva Store')
+        }
+    }, [window.location.pathname])
     return (
         <>
             <nav className="navbar d-flex align-content-center bg-dark">
                 <div className="nav-container">
                     <div className="nav-logo d-flex justify-content-between p-2">
-                        <label onClick={() => navigate('/')}>
-                            De Silva Store
+                        <label
+                            className="text-capitalize"
+                            onClick={() => navigate('/')}
+                        >
+                            {user}
                         </label>
 
                         {click ? (
