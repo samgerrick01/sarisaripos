@@ -32,6 +32,8 @@ function index() {
     })
     const [itemToRemove, setItemToRemove] = useState(null)
     const [openModal, setOpenModal] = useState(false)
+    const [change, setChange] = useState(0)
+    const [cash, setCash] = useState('')
 
     const addItem = () => {
         if (!formData.item || !formData.qty) {
@@ -59,6 +61,10 @@ function index() {
         total = total - itemToRemove.total
         setOpenModal(false)
     }
+
+    useEffect(() => {
+        setChange(cash - total)
+    }, [cash])
 
     useEffect(() => {
         setFormData({
@@ -182,6 +188,39 @@ function index() {
                                 {formatToCurrency(total)}
                             </span>
                         </div>
+                        {total !== 0 && (
+                            <Row className="mb-1">
+                                <Col>
+                                    <FormControl
+                                        style={{
+                                            height: '45px',
+                                        }}
+                                        id="cash"
+                                        autoComplete="off"
+                                        value={cash}
+                                        type="number"
+                                        onChange={(e) =>
+                                            setCash(e.target.value)
+                                        }
+                                        placeholder="Cash"
+                                    />
+                                </Col>
+
+                                <Col className=" d-flex align-content-center p-0 m-0">
+                                    <div className="d-flex justify-content-start">
+                                        Change:
+                                        <span
+                                            style={{
+                                                fontWeight: 'bold',
+                                                fontSize: '24px',
+                                            }}
+                                        >
+                                            {formatToCurrency(change)}
+                                        </span>
+                                    </div>
+                                </Col>
+                            </Row>
+                        )}
                     </div>
 
                     <Row className="mb-2">

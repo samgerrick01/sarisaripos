@@ -66,7 +66,11 @@ function index() {
                                 className="nav-links"
                                 onClick={() => {
                                     handleClick()
-                                    navigate('/e-calculator')
+                                    if (sessionStorage.getItem('user')) {
+                                        navigate('/e-calculator')
+                                    } else {
+                                        toast.error('You are not sign in!')
+                                    }
                                 }}
                             >
                                 E-Calculator
