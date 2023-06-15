@@ -11,6 +11,7 @@ import ViewListahan from './components/Listahan/ViewListahan'
 import AddLista from './components/Listahan/AddLista'
 import UpdateLista from './components/Listahan/UpdateLista'
 import Nav from './components/Nav'
+import Ecalculator from './components/Ecalculator'
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/listahan" element={<ViewListahan />} />
                 <Route path="/add-lista" element={<AddLista />} />
                 <Route path="/update-lista/:id" element={<UpdateLista />} />
+                <Route path="/e-calculator" element={<Ecalculator />} />
             </Routes>
             <Loading />
         </BrowserRouter>

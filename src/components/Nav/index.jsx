@@ -66,6 +66,17 @@ function index() {
                                 className="nav-links"
                                 onClick={() => {
                                     handleClick()
+                                    navigate('/e-calculator')
+                                }}
+                            >
+                                E-Calculator
+                            </div>
+                        </li>
+                        <li className="nav-item">
+                            <div
+                                className="nav-links"
+                                onClick={() => {
+                                    handleClick()
                                     if (sessionStorage.getItem('user')) {
                                         navigate('/credit-list')
                                     } else {
