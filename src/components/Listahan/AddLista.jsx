@@ -38,6 +38,7 @@ const AddLista = () => {
                     setFormData({
                         item: '',
                         qty: '',
+                        status: 0,
                     })
                 })
                 .catch((err) => {
@@ -88,6 +89,7 @@ const AddLista = () => {
                         <Col sm className="mb-3">
                             <FormControl
                                 autoComplete="off"
+                                type="number"
                                 placeholder="Quantity"
                                 value={formData.qty}
                                 onChange={(e) =>

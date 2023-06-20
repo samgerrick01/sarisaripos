@@ -97,6 +97,7 @@ const AddItems = () => {
                         <Col sm className="mb-3">
                             <FormControl
                                 autoComplete="off"
+                                type="number"
                                 id="price"
                                 placeholder="How much the Price"
                                 value={formData.price}
